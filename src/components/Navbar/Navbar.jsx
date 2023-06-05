@@ -27,7 +27,10 @@ const Navbar = () => {
             <Link to="/" className="skills">
               <li>Стоимость</li>
             </Link>
-            <Link to="/login" className="home">
+            <Link to="/deliver" className="deliver">
+              <li>Стать курьером</li>
+            </Link>
+            <Link to="/login" className="login">
               <li>Войти</li>
             </Link>
           </ul>

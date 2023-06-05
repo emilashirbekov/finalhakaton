@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayouts";
 import HomePage from "../pages/HomePage/HomePage";
+import LoginPage from "../pages/LoginPage/LoginPage";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import DeliverPage from "../pages/DeliverPage";
 
 const MainRoutes = () => {
   return (
@@ -10,6 +13,9 @@ const MainRoutes = () => {
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
         </Route>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/deliver" element={<DeliverPage />} />
       </Routes>
     </>
   );
