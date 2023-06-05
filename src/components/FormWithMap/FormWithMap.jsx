@@ -5,10 +5,14 @@ import "./Form.css";
 import "../HowItWorks/HowItWorks.css";
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Введите ваше имя"),
-  email: Yup.string()
-    .email("Введите действительный адрес электронной почты")
-    .required("Введите ваш адрес электронной почты"),
+  fullName: Yup.string().required("Введите ваше имя"),
+  phoneNumber: Yup.string().required("Введите ваш номер телефона"),
+  from: Yup.string().required("Введите адрес откуда доставить"),
+  to: Yup.string().required("Введите адрес куда доставить"),
+  email: Yup.string().required("Введите ваш адрес электронной почты"),
+  weight: Yup.string()
+    .max("Вес должен быть меньше 100кг")
+    .required("Введите вес вашего товара"),
   password: Yup.string()
     .min(6, "Пароль должен содержать минимум 6 символов")
     .required("Введите ваш пароль"),
@@ -17,9 +21,12 @@ const validationSchema = Yup.object({
 const FormWithMap = () => {
   const formik = useFormik({
     initialValues: {
-      name: "",
+      fullName: "",
+      phoneNumber: "",
+      from: "",
+      to: "",
       email: "",
-      password: "",
+      weight: "",
     },
     validationSchema,
     onSubmit: (values) => {
@@ -45,35 +52,98 @@ const FormWithMap = () => {
                   Итоговая стоимость будет зависеть от массы товара
                 </span>
               </h3>
-              <form className="cta-form" action="#">
+              <form
+                className="cta-form"
+                action="#"
+                onSubmit={formik.handleSubmit}
+              >
                 <div>
-                  <label htmlFor="full-name">Фамилия и Имя</label>
+                  <label htmlFor="fullName">Фамилия и Имя</label>
                   <input
-                    id="full-name"
+                    id="fullName"
                     type="text"
                     placeholder="John Smith"
-                    required
+                    value={formik.values.fullName}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                   />
+                  {formik.errors.fullName && formik.touched.fullName && (
+                    <div className="error-message">
+                      {formik.errors.fullName}
+                    </div>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email">Ваша почта</label>
-                  <input id="email" type="email" placeholder="me@example.com" />
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="me@example.com"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.email && formik.touched.email && (
+                    <div className="error-message">{formik.errors.email}</div>
+                  )}
                 </div>
                 <div>
                   <label htmlFor="phoneNumber">Номер телефона</label>
-                  <input id="number" type="number" placeholder="0709465239" />
+                  <input
+                    id="phoneNumber"
+                    type="number"
+                    placeholder="0709465239"
+                    value={formik.values.phoneNumber}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                    <div className="error-message">
+                      {formik.errors.phoneNumber}
+                    </div>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="phoneNumber">Адрес</label>
-                  <input id="text" type="text" placeholder="Куда" />
+                  <label htmlFor="from">Адрес</label>
+                  <input
+                    id="from"
+                    type="text"
+                    placeholder="Куда"
+                    value={formik.values.from}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.from && formik.touched.from && (
+                    <div className="error-message">{formik.errors.from}</div>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="phoneNumber">Адрес</label>
-                  <input id="text" type="text" placeholder="Откуда" />
+                  <label htmlFor="to">Адрес</label>
+                  <input
+                    id="to"
+                    type="text"
+                    placeholder="Откуда"
+                    value={formik.values.to}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.to && formik.touched.to && (
+                    <div className="error-message">{formik.errors.to}</div>
+                  )}
                 </div>
                 <div>
-                  <label htmlFor="phoneNumber">Вес товара</label>
-                  <input id="number" type="number" placeholder="20кг" />
+                  <label htmlFor="weight">Вес товара</label>
+                  <input
+                    id="weight"
+                    type="number"
+                    placeholder="20кг"
+                    value={formik.values.weight}
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.weight && formik.touched.weight && (
+                    <div className="error-message">{formik.errors.weight}</div>
+                  )}
                 </div>
                 <div></div>
                 <p className="price">Сумма:</p>

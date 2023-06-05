@@ -9,7 +9,9 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "../LoginPage/LoginPage.css";
-import { useMediaQuery } from "@mui/material";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useAuth } from "../../context/AuthContextProvider";
 
 function Copyright(props) {
   return (
@@ -28,18 +30,57 @@ function Copyright(props) {
     </Typography>
   );
 }
+const validationSchema = Yup.object({
+  fname: Yup.string().required("Введите ваше имя"),
+  lname: Yup.string().required("Введите вашу фамилию"),
+  phoneNumber: Yup.string().required("Введите ваш номер телефона"),
+  email: Yup.string().required("Введите ваш адрес электронной почты"),
+  password: Yup.string()
+    .min(6, "Пароль должен содержать минимум 6 символов")
+    .required("Введите ваш пароль"),
+  repeatPassword: Yup.string()
+    .min(6, "Подтвердите пароль")
+    .required("Введите ваш пароль"),
+});
 
 const defaultTheme = createTheme();
 
 export default function RegisterPage() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const { register } = useAuth();
+
+  const [formValue, setFormValue] = React.useState({
+    fname: "",
+    lname: "",
+    phoneNumber: "",
+    email: "",
+    password: "",
+    repeatPassword: "",
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      fname: formValue.fname,
+      lname: formValue.lname,
+      phoneNumber: formValue.phoneNumber,
+      email: formValue.email,
+      password: formValue.password,
+      repeatPassword: formValue.repeatPassword,
+    },
+    validationSchema,
+    onSubmit: (event, values) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      formData.append("fname", values.fname);
+      formData.append("lname", values.lname);
+      formData.append("phoneNumber", values.phoneNumber);
+      formData.append("password", values.password);
+      formData.append("repeatPassword", values.repeatPassword);
+      register(formData);
+    },
+    handleChange: (e) => {
+      setFormValue(e.target.name, e.target.value);
+    },
+  });
 
   return (
     <div className="login-page">
@@ -67,7 +108,7 @@ export default function RegisterPage() {
             </Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={formik.handleSubmit}
               noValidate
               sx={{ mt: 1 }}
             >
@@ -75,7 +116,7 @@ export default function RegisterPage() {
                 margin="normal"
                 required
                 fullWidth
-                id="fname"
+                id="formValue."
                 label="Имя"
                 name="fname"
                 autoComplete="fname"
@@ -85,7 +126,13 @@ export default function RegisterPage() {
                     fontSize: "1.6rem", // Увеличение размера плейсхолдера
                   },
                 }}
+                value={formik.values.fname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.fname && formik.touched.fname && (
+                <div className="error-message">{formik.errors.fname}</div>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -100,7 +147,13 @@ export default function RegisterPage() {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.lname}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.lname && formik.touched.lname && (
+                <div className="error-message">{formik.errors.lname}</div>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -115,7 +168,13 @@ export default function RegisterPage() {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.phoneNumber}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+                <div className="error-message">{formik.errors.phoneNumber}</div>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -130,7 +189,13 @@ export default function RegisterPage() {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.email && formik.touched.email && (
+                <div className="error-message">{formik.errors.email}</div>
+              )}
               <TextField
                 margin="normal"
                 required
@@ -145,23 +210,37 @@ export default function RegisterPage() {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.password && formik.touched.password && (
+                <div className="error-message">{formik.errors.password}</div>
+              )}
               <TextField
                 margin="normal"
                 required
                 fullWidth
-                name="password"
+                name="repeatPassword"
                 label="Повторите пароль"
                 type="password"
-                id="password"
+                id="repeatPassword"
                 autoComplete="current-password"
                 InputLabelProps={{
                   style: {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.repeatPassword}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
-
+              {formik.errors.repeatPassword &&
+                formik.touched.repeatPassword && (
+                  <div className="error-message">
+                    {formik.errors.repeatPassword}
+                  </div>
+                )}
               <Button
                 type="submit"
                 fullWidth

@@ -99,3 +99,8 @@
     margin-bottom: 10rem;
   }
 }
+
+.error-message {
+  color: red;
+  font-size: 1.4rem;
+}

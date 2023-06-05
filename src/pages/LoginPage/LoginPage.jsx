@@ -12,6 +12,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import "./LoginPage.css";
 import { useMediaQuery } from "@mui/material";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { useAuth } from "../../context/AuthContextProvider";
 
 function Copyright(props) {
   return (
@@ -23,7 +26,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        express.kg
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -33,17 +36,38 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
+const validationSchema = Yup.object().shape({
+  email: Yup.string().required("Введите ваш адрес электронной почты"),
+  password: Yup.string()
+    .min(6, "Пароль должен содержать минимум 6 символов")
+    .required("Введите ваш пароль"),
+});
+
 export default function LoginPage() {
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+  const { login } = useAuth();
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const isSmallScreen = useMediaQuery("(max-width: 425px)");
+
+  const formik = useFormik({
+    initialValues: {
+      email: email,
+      password: password,
+    },
+    validationSchema,
+    onSubmit: (event, values) => {
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
+      formData.append("email", values.email);
+      formData.append("password", values.password);
+      login(formData);
+    },
+    handleChange: (e) => {
+      setEmail(e.target.value);
+      setPassword(e.target.value);
+    },
+  });
 
   return (
     <div className="login-page">
@@ -78,10 +102,11 @@ export default function LoginPage() {
             </Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={formik.handleSubmit}
               noValidate
               sx={{ mt: 1 }}
             >
+              <label htmlFor="email"></label>
               <TextField
                 margin="normal"
                 required
@@ -93,10 +118,17 @@ export default function LoginPage() {
                 autoFocus
                 InputLabelProps={{
                   style: {
-                    fontSize: "1.6rem", // Увеличение размера плейсхолдера
+                    fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.email}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.email && formik.touched.email && (
+                <div className="error-message">{formik.errors.email}</div>
+              )}
+
               <TextField
                 margin="normal"
                 required
@@ -111,14 +143,17 @@ export default function LoginPage() {
                     fontSize: "1.6rem",
                   },
                 }}
+                value={formik.values.password}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
               />
+              {formik.errors.password && formik.touched.password && (
+                <div className="error-message">{formik.errors.password}</div>
+              )}
               <FormControlLabel
                 className="checkbox"
                 control={
-                  <Checkbox
-                    defaultChecked
-                    sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }}
-                  />
+                  <Checkbox sx={{ "& .MuiSvgIcon-root": { fontSize: 24 } }} />
                 }
                 label="Remember me"
               />
@@ -154,6 +189,9 @@ export default function LoginPage() {
                   </Link>
                 </Grid>
                 <Grid item>
+                  <span style={{ fontSize: "1.4rem", color: "#57607b" }}>
+                    Don't have an account?
+                  </span>
                   <Link
                     href="/register"
                     variant="body2"
@@ -163,7 +201,7 @@ export default function LoginPage() {
                       textDecoration: "underline",
                     }}
                   >
-                    {"Don't have an account? Sign Up"}
+                    <span style={{ marginLeft: "1rem" }}>{"Sign Up"}</span>
                   </Link>
                 </Grid>
               </Grid>

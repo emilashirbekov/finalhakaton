@@ -21,3 +21,12 @@
 .MuiFormControlLabel-label {
   font-size: 1.6rem !important;
 }
+
+.error-message {
+  color: red;
+  font-size: 1.4rem;
+}
+
+input.MuiInputBase-input {
+  font-size: 1.4rem;
+}
