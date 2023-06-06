@@ -18,10 +18,10 @@
   flex-wrap: wrap;
 }
 .MainContain__Right__item {
-  width: 40%;
+  width: 45%;
 
   background: linear-gradient(to right, #b4b4f5, blue, #b4b4f5);
-  border-radius: 30%;
+  border-radius: 10%;
   height: 80px;
   display: flex;
   align-items: center;
