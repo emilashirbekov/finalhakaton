@@ -1,0 +1,16 @@
+.card_container {
+  background: lightskyblue;
+  width: 90%;
+  margin: 50px auto;
+  border-color: black;
+  border-radius: 20px;
+}
+
+.card {
+  width: 70%;
+
+  margin-top: 20px;
+
+  background-color: azure;
+  border: 10px;
+}

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 
 //Создаем контект
 const authContext = createContext();
