@@ -5,6 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import "./CourierCard.css";
+import { Box, width } from "@mui/system";
 
 export default function CourierCard() {
   const [isFlyAway, setFlyAway] = React.useState(false);
@@ -25,33 +26,39 @@ export default function CourierCard() {
       >
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              Lizard
+            <Typography gutterBottom variant="h4" component="div">
+              Order Nº1
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero
-              amet debitis natus maxime autem aut nisi. Vitae fuga nam et error
-              aspernatur ipsum perspiciatis, unde minima consectetur recusandae
-              similique aut odit, vel dolores consequatur. Animi similique velit
-              perspiciatis, ab accusamus itaque beatae voluptatibus eveniet.
-              Pariatur natus molestiae velit quisquam libero?
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Price:
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Address:
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Weight:
-            </Typography>
+            <Box className="info" sx={{ display: "flex" }}>
+              <Box sx={{ margin: "0 10px" }}>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  PhoneNumber:
+                </Typography>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  Weight:
+                </Typography>
+              </Box>
+              <Box sx={{ margin: "0 10px" }}>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  Price:
+                </Typography>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  Address:
+                </Typography>
+              </Box>
+            </Box>
           </CardContent>
         </CardActionArea>
         <CardActions>
           <Button
             size="small"
             className="btn_accept"
-            sx={{ cursor: "pointer", bgcolor: "#00FF7F", color: "white" }}
+            sx={{
+              cursor: "pointer",
+              bgcolor: "#00FF7F",
+              color: "white",
+              fontSize: "14px",
+            }}
             onClick={() => {
               handleFlyAway();
             }}

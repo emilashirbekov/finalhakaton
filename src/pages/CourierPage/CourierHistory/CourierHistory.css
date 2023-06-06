@@ -1,0 +1,25 @@
+.container_history {
+  position: relative;
+  padding: 5px 0;
+  width: 90%;
+  background-color: #7fffd4;
+  border-radius: 10px;
+  align-items: center;
+  margin: 20px auto;
+}
+.card {
+  width: 10%;
+}
+
+@media all and (max-width: 560px) {
+  .card {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
+@media all and (max-width: 768px) {
+  .card {
+    width: 50%;
+    flex-wrap: wrap;
+  }
+}

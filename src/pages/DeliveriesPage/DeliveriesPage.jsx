@@ -21,14 +21,12 @@ const data = [
 ];
 
 const DeliveriesPage = () => {
-  const { getCouriers, couriers } = useAdmin();
+  const { getCouriers, couriers, changeAdopted, expectentions } = useAdmin();
+  const [expectation, setExpectention] = useState(expectentions);
   useEffect(() => {
     getCouriers();
   }, []);
-  let d = 0;
-  const [expectation, setExpectention] = useState();
 
-  console.log(couriers);
   const renderLineChart = (
     <LineChart
       width={600}
@@ -70,7 +68,7 @@ const DeliveriesPage = () => {
             <NotificationImportantIcon fontSize="large"></NotificationImportantIcon>
           </IconButton>
           <span className="MainContain__Right__item__span">
-            expectation : {expectation}
+            expectation : {expectentions}
           </span>
         </div>
         <div className="MainContain__Right__item">

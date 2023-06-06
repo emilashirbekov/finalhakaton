@@ -16,22 +16,5 @@
       "onnOff": "false"
     }
   ],
-  "couriers": [
-    {
-      "id": 1,
-      "phoneNumber": "+996 999 999 999",
-      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "true",
-      "salary": 9000,
-      "FLL": "Emil Ashirbekov"
-    },
-    {
-      "id": 2,
-      "phoneNumber": "+996 999 999 999",
-      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
-      "salary": 9000,
-      "FLL": "Emil Ashirbekov"
-    }
-  ]
+  "couriers": []
 }

@@ -1,12 +1,15 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import AdminPage from "../pages/AdminPage/AdminPage";
+import Navbar from "../components/Navbar/Navbar";
+import Footer from "../components/Footer/Footer";
+import { Outlet } from "react-router-dom";
 
 const MainLayouts = () => {
   return (
-    <div>
-  
-    </div>
+    <>
+      <Navbar />
+      <Outlet />
+      <Footer />
+    </>
   );
 };
 

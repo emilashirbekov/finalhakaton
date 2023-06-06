@@ -11,12 +11,13 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
+
 import { Link } from "react-router-dom";
 
 const pages = [
   { title: "Orders", link: "/courier" },
-  { title: "History", link: "" },
+  { title: "History", link: "/courier_history" },
+  { title: "Home", link: "/" },
 ];
 const settings = [{ title: "Profile", link: "/courier_profile" }];
 
@@ -57,6 +58,7 @@ function CourierNavbar() {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
+              fontSize: "20px",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -100,7 +102,9 @@ function CourierNavbar() {
                   to={page.link}
                   onClick={handleCloseNavMenu}
                 >
-                  <Typography textAlign="center">{page.title}</Typography>
+                  <Typography variant="h5" textAlign="center">
+                    {page.title}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -129,7 +133,12 @@ function CourierNavbar() {
                 component={Link}
                 onClick={handleCloseNavMenu}
                 to={page.link}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontSize: "14px",
+                }}
               >
                 {page.title}
               </Button>
@@ -164,7 +173,7 @@ function CourierNavbar() {
                     component={Link}
                     to={setting.link}
                     textAlign="center"
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: "none", fontSize: "14px" }}
                   >
                     {setting.title}
                   </Typography>

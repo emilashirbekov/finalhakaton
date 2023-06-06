@@ -1,9 +1,10 @@
 import MainRoutes from "./routes/MainRoutes";
+import "./assets/global.css";
 
 function App() {
   return (
     <div className="App">
-      <MainRoutes></MainRoutes>
+      <MainRoutes />
     </div>
   );
 }

@@ -14,14 +14,19 @@ import { Button, TableCell } from "@mui/material";
 import TextField from "@mui/material/TextField";
 const CouriersPage = () => {
   const theme = useTheme();
-  const { getCouriers, couriers, deleteCouriers } = useAdmin();
+  const { getCouriers, couriers, deleteCouriers, changeAdopted } = useAdmin();
   useEffect(() => {
     getCouriers();
   }, []);
+  function handlechange(obj) {
+    obj.adopted = "true";
+    return obj;
+  }
   return (
     <div style={{ width: "60%", marginLeft: "5%" }}>
       {couriers.map((item) => (
         <Card
+          key={item.id}
           sx={{ display: "flex", border: "1px solid black", marginTop: "20px" }}
         >
           <CardMedia
@@ -61,15 +66,18 @@ const CouriersPage = () => {
               </TableCell>
             </Box>
 
-            <Box>
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <TextField
-                sx={{ marginTop: "2%" }}
+                sx={{ marginTop: "2%", width: "20%" }}
                 required
                 id="outlined-required"
                 label="Salary"
                 defaultValue="Hello World"
                 value={item.salary}
               />
+              <Button sx={{ width: "50%", margin: "auto", color: "gray" }}>
+                Изменить курьера
+              </Button>
             </Box>
           </Box>
           {item.adopted == "true" ? (
@@ -81,10 +89,16 @@ const CouriersPage = () => {
             </Button>
           ) : (
             <Box>
-              <Button sx={{ color: "green", height: "50%", width: "100%" }}>
+              <Button
+                onClick={(e) => changeAdopted(item.id, handlechange(item))}
+                sx={{ color: "green", height: "50%", width: "100%" }}
+              >
                 Принять
               </Button>
-              <Button sx={{ color: "red", height: "50%", width: "100%" }}>
+              <Button
+                onClick={deleteCouriers()}
+                sx={{ color: "red", height: "50%", width: "100%" }}
+              >
                 Отклонить
               </Button>
             </Box>

@@ -12,12 +12,15 @@
   color: black;
 }
 
-@media all and (max-width: 560px) {
+@media all and (max-width: 600px) {
   .content {
     display: flex;
     flex-wrap: wrap;
   }
   .container {
+    flex-wrap: wrap;
+  }
+  .info {
     flex-wrap: wrap;
   }
 }

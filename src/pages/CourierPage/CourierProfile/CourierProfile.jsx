@@ -9,19 +9,19 @@ const CourierProfile = () => {
       <CourierNavbar />
       <div className="profile_container">
         <div className="profile">
-          <Typography>Photo:</Typography>
+          <Typography variant="h5">Photo:</Typography>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/274px-Joe_Biden_presidential_portrait.jpg"
             alt="Profile_img"
             width={"20%"}
           />
           <Box>
-            <Typography variant="body1">Name:</Typography>
-            <Typography variant="body1">SurName:</Typography>
-            <Typography variant="body1">Age:</Typography>
-            <Typography variant="body1">Email:</Typography>
-            <Typography variant="body1">PhoneNumber:</Typography>
-            <Typography variant="body1" sx={{ display: "block" }}>
+            <Typography variant="h5">Name:</Typography>
+            <Typography variant="h5">SurName:</Typography>
+            <Typography variant="h5">Age:</Typography>
+            <Typography variant="h5">Email:</Typography>
+            <Typography variant="h5">PhoneNumber:</Typography>
+            <Typography variant="h5" sx={{ display: "block" }}>
               Transport:
             </Typography>
             <img

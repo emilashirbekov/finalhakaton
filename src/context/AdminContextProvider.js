@@ -41,20 +41,18 @@ const AdminContextProvider = ({ children }) => {
       dispatch({ type: "GET_USER", payload: res });
     } catch (error) {}
   }
-  async function getDeliveries() {
-    try {
-      let res = await axios();
-    } catch (error) {}
-  }
+
   async function getCouriers() {
     try {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
-      let d = 0;
-      for (let i = 0; i <= res.data.length; i++) {
-        if (res.data[i].adopted == "false") d++;
-      }
-      dispatch({ type: "GET_EXPECTENTIONS", payload: d });
+      const count = state.couriers.filter(
+        (obj) => obj.adopted === "false"
+      ).length;
+      dispatch({
+        type: "GET_EXPECTENTIONS",
+        payload: count,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -65,10 +63,26 @@ const AdminContextProvider = ({ children }) => {
       getCouriers();
     } catch (error) {}
   }
+  async function changeAdopted(id, obj) {
+    axios.patch(`http://localhost:7000/couriers/${id}`, obj);
+    getCouriers();
+  }
+  // начало заказов
+  async function getDeliveries() {
+    try {
+      let res = await axios.get("http://localhost:7000/couriers");
+      dispatch({ type: "GET_COURIERS", payload: res.data });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   let values = {
     getCouriers,
     couriers: state.couriers,
     deleteCouriers,
+    changeAdopted,
+    // expect,
+    expectentions: state.expectentions,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
