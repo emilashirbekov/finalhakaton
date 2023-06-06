@@ -120,7 +120,7 @@ img {
 .btn,
 .btn:link,
 .btn:visited {
-  display: inline-block;
+  display: table;
   font-size: 2rem;
   font-weight: 600;
   padding: 1.6rem 4.2rem;

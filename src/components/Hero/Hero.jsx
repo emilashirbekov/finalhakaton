@@ -5,7 +5,7 @@ import third from "../../assets/images/step3.png";
 const Hero = () => {
   return (
     <>
-      <section className="section-hero">
+      <section id="hero" className="section-hero">
         <div className="hero">
           <div className="hero-text-box">
             <h1 className="heading-primary">

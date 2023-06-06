@@ -8,7 +8,7 @@ import fourth from "../../assets/images/fourth.JPG";
 const About = () => {
   return (
     <>
-      <div className="container grid grid--4col">
+      <div id="about" className="container grid grid--4col about">
         <div className="feature">
           <img src={first} alt="first" />
           <p className="featured-title">По всему Бишкеку</p>

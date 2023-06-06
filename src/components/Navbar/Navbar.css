@@ -53,6 +53,7 @@ button {
   font-size: 1.4rem;
   background: none;
 }
+
 @media (max-width: 1024px) {
   .logo {
     display: flex;
@@ -96,4 +97,9 @@ button {
 
 .login {
   border: 2px solid #f0f0f0;
+  padding: 0.8rem 1.5rem;
+}
+
+nav li > a {
+  color: #f0f0f0 !important;
 }

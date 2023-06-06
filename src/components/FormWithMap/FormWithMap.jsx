@@ -36,7 +36,7 @@ const FormWithMap = () => {
 
   return (
     <>
-      <div className="step-box-2 bg">
+      <div id="form" className="step-box-2 bg">
         <section className="section-cta" id="cta">
           <div className="cta">
             <div className="cta-text-box">

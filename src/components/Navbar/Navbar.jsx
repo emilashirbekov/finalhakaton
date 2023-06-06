@@ -6,33 +6,61 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
+
+  const handleLinkClick = (event, targetId) => {
+    event.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
-      <header className="">
+      <header>
         <nav className="navbar">
           <h3 className="logo">Logo</h3>
           <ul
             className={Mobile ? "nav-links-mobile" : "nav-links"}
             onClick={() => setMobile(false)}
           >
-            <Link to="/" className="home">
-              <li>Главная</li>
-            </Link>
-            <Link to="/" className="about">
-              <li>Как заказать</li>
-            </Link>
-            <Link to="/" className="services">
-              <li>О доставке</li>
-            </Link>
-            <Link to="/" className="skills">
-              <li>Стоимость</li>
-            </Link>
-            <Link to="/deliver" className="deliver">
-              <li>Стать курьером</li>
-            </Link>
-            <Link to="/login" className="login">
-              <li>Войти</li>
-            </Link>
+            <li>
+              <Link
+                className="home"
+                onClick={(e) => handleLinkClick(e, "hero")}
+              >
+                Главная
+              </Link>
+            </li>
+            <li>
+              <Link className="how" onClick={(e) => handleLinkClick(e, "how")}>
+                Как заказать
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="#"
+                className="about"
+                onClick={(e) => handleLinkClick(e, "about")}
+              >
+                О доставке
+              </Link>
+            </li>
+            <li>
+              <Link to="#" onClick={(e) => handleLinkClick(e, "form")}>
+                Стоимость
+              </Link>
+            </li>
+            <li>
+              <Link to="/deliver" className="deliver">
+                Стать курьером
+              </Link>
+            </li>
+            <li>
+              <Link to="/login" className="login">
+                Войти
+              </Link>
+            </li>
           </ul>
 
           <button
