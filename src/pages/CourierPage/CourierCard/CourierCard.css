@@ -1,16 +1,27 @@
-.card_container {
-  background: lightskyblue;
+.container {
+  position: relative;
+  padding: 5px 0;
   width: 90%;
-  margin: 50px auto;
-  border-color: black;
-  border-radius: 20px;
+
+  align-items: center;
+  margin: 20px auto;
+  transition: transform 0.3s ease-in-out;
 }
 
-.card {
-  width: 70%;
+.btn_accept:hover {
+  color: black;
+}
 
-  margin-top: 20px;
-
-  background-color: azure;
-  border: 10px;
+@media all and (max-width: 560px) {
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .container {
+    flex-wrap: wrap;
+  }
+}
+.content.fly-away {
+  transition: 1s;
+  transform: translateY(-100%);
 }
