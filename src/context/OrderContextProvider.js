@@ -4,7 +4,7 @@ import { API_AUTH } from "../helpers/const";
 
 const orderContext = createContext();
 
-const useOrder = () => useContext(orderContext);
+export const useOrder = () => useContext(orderContext);
 
 const INIT_STATE = {
   orders: [],
@@ -33,7 +33,7 @@ const getAuth = () => {
   return config;
 };
 
-const OrderContextProvider = ({ childern }) => {
+const OrderContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   const getOrders = async () => {
@@ -62,9 +62,13 @@ const OrderContextProvider = ({ childern }) => {
     }
   };
 
-  const values = {};
+  const values = {
+    orders: state.orders,
+    getOrders,
+    addOrder,
+  };
   return (
-    <orderContext.Provider value={values}>{childern}</orderContext.Provider>
+    <orderContext.Provider value={values}>{children}</orderContext.Provider>
   );
 };
 

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import "./Form.css";
 import "../HowItWorks/HowItWorks.css";
+import { useOrder } from "../../context/OrderContextProvider";
 
 const validationSchema = Yup.object({
   fullName: Yup.string().required("Введите ваше имя"),
@@ -13,24 +14,44 @@ const validationSchema = Yup.object({
   weight: Yup.string()
     .max("Вес должен быть меньше 100кг")
     .required("Введите вес вашего товара"),
-  password: Yup.string()
-    .min(6, "Пароль должен содержать минимум 6 символов")
-    .required("Введите ваш пароль"),
 });
 
 const FormWithMap = () => {
+  const { addOrder } = useOrder();
+
+  const [formValue, setFormValue] = useState({
+    fullName: "",
+    email: "",
+    phoneNumber: "",
+    from: "",
+    to: "",
+    weight: "",
+  });
+
   const formik = useFormik({
     initialValues: {
-      fullName: "",
-      phoneNumber: "",
-      from: "",
-      to: "",
-      email: "",
-      weight: "",
+      fullName: formValue.fullName,
+      phoneNumber: formValue.fullName,
+      from: formValue.from,
+      to: formValue.to,
+      email: formValue.email,
+      weight: formValue.weight,
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      const formData = new FormData();
+      formData.append("fullName", values.fullName);
+      formData.append("phoneNumber", values.phoneNumber);
+      formData.append("from", values.from);
+      formData.append("to", values.to);
+      formData.append("email", values.email);
+      formData.append("weight", values.weight);
+
+      addOrder(formData);
+    },
+
+    handleChange: (e) => {
+      setFormValue({ ...formValue, [e.target.name]: e.target.value });
     },
   });
 
