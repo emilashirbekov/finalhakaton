@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import "../components/FormWithMap/Form.css";
+import "../components/Payment/Form.css";
 import "../components/Hero/Hero.css";
 import Modal from "../components/Modal/Modal";
 

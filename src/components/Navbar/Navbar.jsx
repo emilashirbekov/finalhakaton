@@ -3,9 +3,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
+import { Avatar, IconButton, Tooltip } from "@mui/material";
+import { Badge } from "@mui/base";
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
+
+  const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const handleLinkClick = (event, targetId) => {
     event.preventDefault();
@@ -15,11 +20,15 @@ const Navbar = () => {
     }
   };
 
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
   return (
     <>
       <header>
         <nav className="navbar">
-          <h3 className="logo">Logo</h3>
+          <h3 className="logo">jetkirKG</h3>
           <ul
             className={Mobile ? "nav-links-mobile" : "nav-links"}
             onClick={() => setMobile(false)}
@@ -55,6 +64,32 @@ const Navbar = () => {
               <Link to="/deliver" className="deliver">
                 Стать курьером
               </Link>
+            </li>
+            <li>
+              <Tooltip title="bag">
+                <IconButton
+                  size="large"
+                  sx={{ padding: 0, margin: 0 }}
+                  aria-label="show 17 new notifications"
+                >
+                  <Badge badgeContent={0} component={Link} to="/bag">
+                    <ShoppingBagIcon sx={{ color: "#fff" }} fontSize="large" />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            </li>
+            <li style={{ padding: 0, margin: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton
+                  onClick={handleOpenUserMenu}
+                  sx={{ padding: 0, margin: 0 }}
+                >
+                  <Avatar
+                    alt="photo"
+                    // src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
+                  />
+                </IconButton>
+              </Tooltip>
             </li>
             <li>
               <Link to="/login" className="login">
