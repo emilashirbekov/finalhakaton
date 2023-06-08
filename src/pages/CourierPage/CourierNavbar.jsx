@@ -167,18 +167,26 @@ function CourierNavbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting.title} onClick={handleCloseUserMenu}>
-                  <Typography
+              <MenuItem onClick={handleCloseUserMenu}>
+                <Box sx={{ display: "flex", flexDirection: "column" }}>
+                  {" "}
+                  <Button
                     component={Link}
-                    to={setting.link}
-                    textAlign="center"
+                    to={"/courier_profile"}
                     style={{ textDecoration: "none", fontSize: "14px" }}
                   >
-                    {setting.title}
-                  </Typography>
-                </MenuItem>
-              ))}
+                    Profile
+                  </Button>
+                  <Button
+                    style={{
+                      textDecoration: "none",
+                      fontSize: "14px",
+                    }}
+                  >
+                    Logout
+                  </Button>
+                </Box>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

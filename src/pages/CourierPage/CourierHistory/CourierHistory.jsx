@@ -10,8 +10,7 @@ import CourierNavbar from "../CourierNavbar";
 export default function CourierHistory() {
   return (
     <>
-      <CourierNavbar />
-      <div className="container_history">
+      <div className="hisory">
         <Card
           sx={{
             display: "flex",

@@ -10,6 +10,7 @@ import AdminPage from "../pages/AdminPage/AdminPage";
 import CourierPage from "../pages/CourierPage/CourierList/CourierPage";
 import CourierProfile from "../pages/CourierPage/CourierProfile/CourierProfile";
 import CourierHistory from "../pages/CourierPage/CourierHistory/CourierHistory";
+import HistoryPage from "../pages/CourierPage/CourierHistory/HistoryPage";
 const MainRoutes = () => {
   return (
     <>
@@ -18,7 +19,7 @@ const MainRoutes = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/user" element={<UserProfilePage />} />
         </Route>
-        <Route path="/courier_history" element={<CourierHistory />} />
+        <Route path="/courier_history" element={<HistoryPage />} />
         <Route path="/courier" element={<CourierPage />} />
         <Route path="/courier_profile" element={<CourierProfile />} />
         <Route path="/login" element={<LoginPage />} />

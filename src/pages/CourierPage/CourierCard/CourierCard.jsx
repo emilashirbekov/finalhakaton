@@ -26,24 +26,35 @@ export default function CourierCard() {
       >
         <CardActionArea>
           <CardContent>
-            <Typography gutterBottom variant="h4" component="div">
+            <Typography
+              sx={{ textAlign: "center" }}
+              gutterBottom
+              variant="h4"
+              component="div"
+            >
               Order Nº1
             </Typography>
             <Box className="info" sx={{ display: "flex" }}>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  PhoneNumber:
+                  PhoneNumber:777777777
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Weight:
+                  Weight:777
+                </Typography>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  Name:Lucifer
                 </Typography>
               </Box>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Price:
+                  Price:999
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Address:
+                  Address:logvinenko 99
+                </Typography>
+                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
+                  From: Restoran Grand hall
                 </Typography>
               </Box>
             </Box>

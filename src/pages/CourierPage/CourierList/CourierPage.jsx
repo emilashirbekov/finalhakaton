@@ -7,6 +7,7 @@ const CourierPage = () => {
     <div>
       <CourierNavbar />
       <CourierCard />
+      <CourierCard /> <CourierCard />
     </div>
   );
 };

@@ -1,7 +1,22 @@
 .profile_container {
   background: #87cefa;
   border-radius: 20px;
-  width: 40%;
+  width: 60%;
   margin: 20px auto;
   padding: 40px;
+}
+
+@media all and (max-width: 680px) {
+  .profile_container {
+    width: 80%;
+  }
+  .profile_img {
+    width: 50%;
+  }
+}
+
+@media all and (max-width: 320px) {
+  .profile_container {
+    width: 100%;
+  }
 }

@@ -9,18 +9,18 @@ const CourierProfile = () => {
       <CourierNavbar />
       <div className="profile_container">
         <div className="profile">
-          <Typography variant="h5">Photo:</Typography>
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Joe_Biden_presidential_portrait.jpg/274px-Joe_Biden_presidential_portrait.jpg"
             alt="Profile_img"
             width={"20%"}
+            className="profile_img"
           />
-          <Box>
-            <Typography variant="h5">Name:</Typography>
-            <Typography variant="h5">SurName:</Typography>
-            <Typography variant="h5">Age:</Typography>
-            <Typography variant="h5">Email:</Typography>
-            <Typography variant="h5">PhoneNumber:</Typography>
+          <Box className="information">
+            <Typography variant="h5">Name:Linda</Typography>
+            <Typography variant="h5">SurName: Martin</Typography>
+            <Typography variant="h5">Age:49</Typography>
+            <Typography variant="h5">Email:Linda@Martin</Typography>
+            <Typography variant="h5">PhoneNumber:08888</Typography>
             <Typography variant="h5" sx={{ display: "block" }}>
               Transport:
             </Typography>
