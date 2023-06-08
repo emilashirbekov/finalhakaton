@@ -5,6 +5,7 @@
 
 .hero {
   max-width: 130rem;
+  height: 90vh;
   margin: 0 auto;
   padding: 0 3.2rem;
   display: grid;
