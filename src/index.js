@@ -7,16 +7,19 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./context/AuthContextProvider";
 import OrderContextProvider from "./context/OrderContextProvider";
 import AdminContextProvider from "./context/AdminContextProvider";
+import CourierContextProvider from "./context/CourierContextProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  <AdminContextProvider>
-    <AuthContextProvider>
-      <OrderContextProvider>
-        <App />
-      </OrderContextProvider>
-    </AuthContextProvider>
-  </AdminContextProvider>
+    <CourierContextProvider>
+      <AdminContextProvider>
+        <AuthContextProvider>
+          <OrderContextProvider>
+            <App />
+          </OrderContextProvider>
+        </AuthContextProvider>
+      </AdminContextProvider>
+    </CourierContextProvider>
   </BrowserRouter>
 );

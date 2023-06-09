@@ -3,6 +3,14 @@ import "./Hero.css";
 import third from "../../assets/images/step3.png";
 
 const Hero = () => {
+  const handleLinkClick = (event, targetId) => {
+    event.preventDefault();
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <>
       <section id="hero" className="section-hero">
@@ -16,7 +24,11 @@ const Hero = () => {
               зарегистрируйтесь на сайте. Заполните форму доставки и ожидайте
               ответа Делаем доставку быстро, надежно и с заботой о посылке.
             </p>
-            <a href="#cta" className="btn btn--full margin--right-sm">
+            <a
+              href="#cta"
+              onClick={(e) => handleLinkClick(e, "form")}
+              className="btn btn--full margin--right-sm"
+            >
               Заказать доставку
             </a>
           </div>

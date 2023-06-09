@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import "../components/Payment/Form.css";
-import "../components/Hero/Hero.css";
-import Modal from "../components/Modal/Modal";
+import Modal from "../../components/Modal/Modal";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Введите ваше имя"),
@@ -61,7 +59,6 @@ const DeliverPage = () => {
           <div className="cta">
             <div className="cta-text-box">
               <h3 className="heading-secondary">
-                Стать курьером <br />
                 <span
                   style={{
                     fontSize: "1.4rem",
@@ -171,7 +168,7 @@ const DeliverPage = () => {
                 </div>
 
                 <button type="submit" className="open-modal-btn btn btn--form">
-                  Отправить заявку
+                  Update
                 </button>
               </form>
             </div>

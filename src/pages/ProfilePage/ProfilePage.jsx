@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import ProfileForm from "../../ProfilePage/ProfileForm";
-import "./CourierProfile.css";
-import { Link } from "react-router-dom";
-import CourierNavbar from "../CourierNavbar";
+import "./Profile.css";
+import ProfileForm from "./ProfileForm";
 
-const CourierProfile = () => {
+const ProfilePage = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => {
     setOpen(!open);
   };
   return (
     <>
-      <CourierNavbar />
       <div className="container">
         <div className="profile-header">
           <div className="profile-img">
@@ -57,6 +54,8 @@ const CourierProfile = () => {
                 >
                   Информация
                 </li>
+
+                <li className="user-review">История ваших заказов</li>
               </ul>
             </div>
             {open && <ProfileForm />}
@@ -67,4 +66,4 @@ const CourierProfile = () => {
   );
 };
 
-export default CourierProfile;
+export default ProfilePage;
