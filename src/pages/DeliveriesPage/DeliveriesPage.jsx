@@ -29,7 +29,7 @@ const DeliveriesPage = () => {
 
   const renderLineChart = (
     <LineChart
-      width={600}
+      width={500}
       height={300}
       data={data}
       margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
