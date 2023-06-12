@@ -2,19 +2,37 @@
   "deliveriers": [
     {
       "id": 1,
-      "title": "Emka",
-      "onnOff": "false"
-    },
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "false"
+    }
+  ],
+  "couriers": [
     {
-      "id": 2,
-      "title": "Emka",
-      "onnOff": "false"
+      "id": 1,
+      "phoneNumber": "+996 999 999 999",
+      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
+      "salary": 9320,
+      "FLL": "Emil Ashirbekov"
     },
     {
       "id": 3,
-      "title": "Emka",
-      "onnOff": "false"
+      "phoneNumber": "+996 999 999 999",
+      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
+      "salary": 300,
+      "FLL": "Emil Ashirbekov"
+    },
+    {
+      "id": 6,
+      "phoneNumber": "+996 999 999 999",
+      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "false",
+      "salary": 5600,
+      "FLL": "Emil Ashirbekov"
     }
-  ],
-  "couriers": []
+  ]
 }

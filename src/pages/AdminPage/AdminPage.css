@@ -28,6 +28,7 @@
   font-size: 2em; /* Размер текста в относительных единицах */
   color: black;
   border-bottom: 4px solid grey;
+  padding-left: 6%;
 }
 
 .MainContainer {
