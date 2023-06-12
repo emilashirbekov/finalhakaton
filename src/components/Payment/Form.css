@@ -107,8 +107,11 @@
   border-radius: 1.6rem;
 }
 
+.pass.MuiTypography-root {
+  font-size: 1.4rem !important;
+}
 .MuiTypography-root {
-  font-size: 2rem !important;
+  font-size: 1.4rem !important;
 }
 
 .MuiStepLabel-label {

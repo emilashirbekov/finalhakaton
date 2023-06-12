@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useReducer } from "react";
-import { API_AUTH } from "../helpers/const";
+import { API_ORDERS } from "../helpers/const";
 
 const orderContext = createContext();
 
@@ -39,7 +39,10 @@ const OrderContextProvider = ({ children }) => {
   const getOrders = async () => {
     try {
       const config = getAuth();
-      const res = await axios(`${API_AUTH}/${window.location.search}`, config);
+      const res = await axios(
+        `${API_ORDERS}/${window.location.search}`,
+        config
+      );
       dispatch({
         type: "GET_ORDERS",
         payload: res.data.results,
@@ -56,7 +59,7 @@ const OrderContextProvider = ({ children }) => {
   const addOrder = async (newOrder) => {
     try {
       const config = getAuth();
-      const res = await axios.post(`${API_AUTH}/orders/`, newOrder, config);
+      const res = await axios.post(`${API_ORDERS}/orders/`, newOrder, config);
     } catch (error) {
       console.log(error);
     }

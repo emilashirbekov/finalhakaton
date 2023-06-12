@@ -5,6 +5,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
 import "./Form.css";
+import { useOrder } from "../../context/OrderContextProvider";
 
 const products = [
   {
@@ -13,22 +14,23 @@ const products = [
     price: "$9.99",
   },
 
-  { name: "Shipping", desc: "", price: "Free" },
+  { name: "Shipping", desc: "", price: "200 сом" },
 ];
 
 const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
 const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
+  { name: "Тип карты", detail: "Visa" },
+  { name: "Владелец карты", detail: "Mr John Smith" },
+  { name: "Номер карты", detail: "xxxx-xxxx-xxxx-1234" },
+  { name: "Дата заказа", detail: "04/2024" },
 ];
 
 export default function Review() {
+  const { orders } = useOrder();
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Order summary
+        Обзор
       </Typography>
       <List disablePadding>
         {products.map((product) => (

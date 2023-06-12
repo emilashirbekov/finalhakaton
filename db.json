@@ -16,5 +16,11 @@
       "onnOff": "false"
     }
   ],
-  "couriers": []
+  "couriers": [
+    {
+      "id": 3,
+      "phoneNumber": "0709465239",
+      "salary": "345"
+    }
+  ]
 }

@@ -1,10 +1,9 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { API_AUTH } from "../helpers/const";
+import React, { createContext, useContext, useReducer, useEffect } from "react";
+import { API_REGISTER } from "../helpers/const";
 import axios from "axios";
 
 //Создаем контект
 const authContext = createContext();
-
 //Создаем кастомный хук чтобы все получать значения из этого контекста
 export const useAuth = () => useContext(authContext);
 
@@ -38,10 +37,11 @@ const AuthContextProvider = ({ children }) => {
   //Отправляем наши данные на API на определенный эндпоинт
   const register = async (user) => {
     try {
-      await axios.post(`${API_AUTH}/register/`, user);
-      alert("Успех");
+      const res = await axios.post(`${API_REGISTER}/`, user);
+      // console.log(`${API_REGISTER}/register/`);
+      console.log(res);
     } catch (error) {
-      console.warn(error);
+      console.log(error, "error");
       dispatch({
         type: "SET_ERROR",
         payload: error.response.data,
@@ -49,33 +49,41 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const login = async (user) => {
-    try {
-      let res = await axios.post(`${API_AUTH}/login/`, user);
-      alert("Успех");
-      localStorage.setItem("token", JSON.parse(res));
-    } catch (error) {
-      console.warn(error);
-      dispatch({
-        type: "SET_ERROR",
-        payload: error.response.data,
-      });
-    }
-  };
+  // const login = async (user) => {
+  //   try {
+  //     let res = await axios.post(`${API_REGISTER}/login/`, user);
+  //     alert("Успех");
+  //     localStorage.setItem("token", JSON.parse(res));
+  //   } catch (error) {
+  //     console.warn(error);
+  //     dispatch({
+  //       type: "SET_ERROR",
+  //       payload: error.response.data,
+  //     });
+  //   }
+  // };
 
-  const checkAuth = async () => {
-    try {
-      const token = JSON.parse(localStorage.getItem("token"));
-      let res = await axios.post(`${API_AUTH}/token/refresh`, {
-        refresh: token.refresh,
-      });
-      localStorage.setItem("token", JSON.stringify(res));
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const checkAuth = async () => {
+  //   try {
+  //     const token = JSON.parse(localStorage.getItem("token"));
+  //     let res = await axios.post(`${API_REGISTER}/refresh`, {
+  //       refresh: token.refresh,
+  //     });
+  //     localStorage.setItem("token", JSON.stringify(res));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  let values = { register, login };
+  // useEffect(() => {
+  //   if (localStorage.getItem("token")) {
+  //     checkAuth();
+  //   } else {
+  //     navigate("/register");
+  //   }
+  // }, []);
+
+  let values = { register };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
 

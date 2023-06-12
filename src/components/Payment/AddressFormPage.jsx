@@ -8,14 +8,11 @@ import Button from "@mui/material/Button";
 import "./Form.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { TextareaAutosize } from "@mui/base";
+import { useOrder } from "../../context/OrderContextProvider";
 
 export default function AddressForm() {
-  const [formValue, setFormValue] = React.useState({
-    fname: "",
-    lname: "",
-    from: "",
-    to: "",
-  });
+  const { addOrder } = useOrder();
 
   const validationSchema = Yup.object().shape({
     fname: Yup.string().required("Введите ваше имя"),
@@ -26,18 +23,15 @@ export default function AddressForm() {
 
   const formik = useFormik({
     initialValues: {
-      fname: formValue.fname,
-      lname: formValue.lname,
-      from: formValue.from,
-      to: formValue.to,
+      phoneSender: "",
+      addressSender: "",
+      addressReceiever: "",
+      description: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      const formData = new FormData();
-      formData.append("name", values.fname);
-      formData.append("name", values.lname);
-      formData.append("name", values.from);
-      formData.append("name", values.to);
+    onSubmit: async (values) => {
+      addOrder(values);
+      console.log(values);
     },
   });
 
@@ -50,68 +44,80 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="fname"
-            name="fname"
-            label="Имя"
+            id="phoneSender"
+            name="phoneSender"
+            label="Ваш номер телефона"
             fullWidth
             autoComplete="given-name"
             variant="standard"
-            value={formik.values.fname}
+            value={formik.values.phoneSender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.fname && formik.touched.fname && (
-            <div className="error-message">{formik.errors.fname}</div>
+          {formik.errors.phoneSender && formik.touched.phoneSender && (
+            <div className="error-message">{formik.errors.phoneSender}</div>
           )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="lname"
-            name="lname"
-            label="Фамилия"
+            id="addressSender"
+            name="addressSender"
+            label="Введите адресс куда нужно доставить"
             fullWidth
             autoComplete="family-name"
             variant="standard"
-            value={formik.values.lname}
+            value={formik.values.addressSender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.lname && formik.touched.lname && (
-            <div className="error-message">{formik.errors.lname}</div>
+          {formik.errors.addressSender && formik.touched.addressSender && (
+            <div className="error-message">{formik.errors.addressSender}</div>
           )}
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="from"
-            name="from"
-            label="Откуда"
+            id="addressReceiever"
+            name="addressReceiever"
+            label="Введите ваш адресс"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
-            value={formik.values.from}
+            value={formik.values.addressReceiever}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.from && formik.touched.from && (
-            <div className="error-message">{formik.errors.from}</div>
-          )}
+          {formik.errors.addressReceiever &&
+            formik.touched.addressReceiever && (
+              <div className="error-message">
+                {formik.errors.addressReceiever}
+              </div>
+            )}
         </Grid>
         <Grid item xs={12}>
-          <TextField
-            id="to"
-            name="to"
-            label="Куда"
-            fullWidth
+          <p>Введите описание вашего товара </p>
+          <TextareaAutosize
+            style={{
+              width: "100%",
+              padding: "10px",
+              fontSize: "14px",
+              borderRadius: "4px",
+              border: "1px solid #ccc",
+            }}
+            id="description"
+            name="description"
             autoComplete="shipping address-line2"
+            minRows={6}
+            maxRows={6}
+            aria-label="textarea"
             variant="standard"
-            value={formik.values.to}
+            value={formik.values.description}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.to && formik.touched.to && (
-            <div className="error-message">{formik.errors.to}</div>
+          {formik.errors.description && formik.touched.description && (
+            <div className="error-message">{formik.errors.description}</div>
           )}
         </Grid>
         <Grid item xs={12}>
