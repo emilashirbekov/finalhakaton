@@ -4,8 +4,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
-import "./Form.css";
-import { useOrder } from "../../context/OrderContextProvider";
 
 const products = [
   {
@@ -14,23 +12,17 @@ const products = [
     price: "$9.99",
   },
 
-  { name: "Shipping", desc: "", price: "200 сом" },
+  { name: "Shipping", desc: "", price: "Free" },
 ];
 
 const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Тип карты", detail: "Visa" },
-  { name: "Владелец карты", detail: "Mr John Smith" },
-  { name: "Номер карты", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Дата заказа", detail: "04/2024" },
-];
+const payments = [{ name: "Card type", detail: "Visa" }];
 
 export default function Review() {
-  const { orders } = useOrder();
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Обзор
+        Order summary
       </Typography>
       <List disablePadding>
         {products.map((product) => (
@@ -50,14 +42,14 @@ export default function Review() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Доставка
+            Shipping
           </Typography>
           <Typography gutterBottom>John Smith</Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Детали оплаты
+            Payment details
           </Typography>
           <Grid container>
             {payments.map((payment) => (

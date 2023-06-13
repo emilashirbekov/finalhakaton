@@ -14,10 +14,11 @@ import Review from "./Review";
 import { Paper } from "@mui/material";
 import "./Form.css";
 import { Link } from "react-router-dom";
-import { useAuth } from "../../context/AuthContextProvider";
+import { useOrder } from "../../context/OrderContextProvider";
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
+  const { addOrder } = useOrder();
 
   const handleNext = () => {
     setActiveStep(activeStep + 1);
@@ -28,7 +29,7 @@ function Checkout() {
   };
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const { users } = useAuth();
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
@@ -36,6 +37,21 @@ function Checkout() {
       setIsLoggedIn(false);
     }
   }, []);
+
+  const [formData, setFormData] = useState({
+    address: {
+      phone_sender: "",
+      address_sender: "",
+      address_receiver: "",
+      description: "",
+    },
+    payment: {
+      cardName: "",
+      cardNumber: "",
+      date: "",
+      cvv: "",
+    },
+  });
 
   return (
     <>
@@ -86,7 +102,11 @@ function Checkout() {
                   {activeStep === 2 && <Review />}
                   <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                     {activeStep !== 0 && (
-                      <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
+                      <Button
+                        type="submit"
+                        onClick={handleBack}
+                        sx={{ mt: 3, ml: 1 }}
+                      >
                         Назад
                       </Button>
                     )}

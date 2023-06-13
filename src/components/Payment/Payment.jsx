@@ -9,38 +9,23 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 
 export default function PaymentForm() {
-  const [formValue, setFormValue] = React.useState({
-    cardName: "",
-    cardNumber: "",
-    date: "",
-    cvv: "",
-  });
-
   const validationSchema = Yup.object().shape({
     cardName: Yup.string().required("Введите название карты"),
-    cardNumber: Yup.string().required("Введите номер карты"),
-    date: Yup.string().required("Введите дату"),
-    cvv: Yup.string().required("Последние три цифры на полоске для подписи"),
+    cardNumber: Yup.string().required("Введите номер вашей карты"),
+    date: Yup.string().required("Введите текущую дату"),
+    CVV: Yup.string().required("Введите последние 3 цифры вашей карты"),
   });
 
   const formik = useFormik({
     initialValues: {
-      cardName: formValue.cardName,
-      cardNumber: formValue.cardNumber,
-      date: formValue.date,
-      cvv: formValue.cvv,
+      cardName: "",
+      cardNumber: "",
+      date: "",
+      CVV: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      const formData = new FormData();
-      formData.append("name", values.cardName);
-      formData.append("name", values.cardNumber);
-      formData.append("name", values.date);
-      formData.append("name", values.cvv);
-    },
-
-    handleChange: (e) => {
-      setFormValue({ ...formValue, [e.target.name]: e.target.value });
+    onSubmit: async (values) => {
+      console.log(values);
     },
   });
 
@@ -98,19 +83,19 @@ export default function PaymentForm() {
         <Grid item xs={12} md={6}>
           <TextField
             required
-            id="cvv"
+            id="CVV"
             label="CVV"
             helperText="Last three digits on signature strip"
             fullWidth
             autoComplete="cc-csc"
             variant="standard"
             className="helper-text"
-            value={formik.values.cvv}
+            value={formik.values.CVV}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.cvv && formik.touched.cvv && (
-            <div className="error-message">{formik.errors.cvv}</div>
+          {formik.errors.CVV && formik.touched.CVV && (
+            <div className="error-message">{formik.errors.CVV}</div>
           )}
         </Grid>
         <Grid item xs={12}>

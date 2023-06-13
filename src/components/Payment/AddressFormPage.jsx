@@ -4,34 +4,36 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
 import "./Form.css";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { TextareaAutosize } from "@mui/base";
 import { useOrder } from "../../context/OrderContextProvider";
+import { Button } from "@mui/material";
 
 export default function AddressForm() {
   const { addOrder } = useOrder();
 
   const validationSchema = Yup.object().shape({
-    fname: Yup.string().required("Введите ваше имя"),
-    lname: Yup.string().required("Введите вашу фамилию"),
-    from: Yup.string().required("Введите ваш адрес"),
-    to: Yup.string().required("Введите адрес куда доставить"),
+    phone_sender: Yup.string().required("Введите ваш номер телефона"),
+    address_sender: Yup.string().required("Введите ваш адресс"),
+    address_receiver: Yup.string().required(
+      "Введите адресс куда надо достваить "
+    ),
+    description: Yup.string().required("Введите адрес куда доставить"),
   });
 
   const formik = useFormik({
     initialValues: {
-      phoneSender: "",
-      addressSender: "",
-      addressReceiever: "",
+      phone_sender: "",
+      address_sender: "",
+      address_receiver: "",
       description: "",
     },
     validationSchema,
     onSubmit: async (values) => {
-      addOrder(values);
       console.log(values);
+      addOrder(values);
     },
   });
 
@@ -44,54 +46,54 @@ export default function AddressForm() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="phoneSender"
-            name="phoneSender"
+            id="phone_sender"
+            name="phone_sender"
             label="Ваш номер телефона"
             fullWidth
             autoComplete="given-name"
             variant="standard"
-            value={formik.values.phoneSender}
+            value={formik.values.phone_sender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.phoneSender && formik.touched.phoneSender && (
-            <div className="error-message">{formik.errors.phoneSender}</div>
+          {formik.errors.phone_sender && formik.touched.phone_sender && (
+            <div className="error-message">{formik.errors.phone_sender}</div>
           )}
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="addressSender"
-            name="addressSender"
+            id="address_sender"
+            name="address_sender"
             label="Введите адресс куда нужно доставить"
             fullWidth
             autoComplete="family-name"
             variant="standard"
-            value={formik.values.addressSender}
+            value={formik.values.address_sender}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.addressSender && formik.touched.addressSender && (
-            <div className="error-message">{formik.errors.addressSender}</div>
+          {formik.errors.address_sender && formik.touched.address_sender && (
+            <div className="error-message">{formik.errors.address_sender}</div>
           )}
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
-            id="addressReceiever"
-            name="addressReceiever"
+            id="address_receiver"
+            name="address_receiver"
             label="Введите ваш адресс"
             fullWidth
             autoComplete="shipping address-line1"
             variant="standard"
-            value={formik.values.addressReceiever}
+            value={formik.values.address_receiver}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.addressReceiever &&
-            formik.touched.addressReceiever && (
+          {formik.errors.address_receiver &&
+            formik.touched.address_receiver && (
               <div className="error-message">
-                {formik.errors.addressReceiever}
+                {formik.errors.address_receiver}
               </div>
             )}
         </Grid>
