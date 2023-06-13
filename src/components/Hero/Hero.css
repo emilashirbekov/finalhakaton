@@ -12,6 +12,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 9.6rem;
   align-items: center;
+  z-index: -1;
 }
 
 .heading-primary {
@@ -65,7 +66,7 @@
 }
 
 /* АДАПТИВКА */
-@media screen and (max-width: 546px) {
+@media screen and (max-width: 768px) {
   .hero {
     grid-template-columns: 1fr;
   }

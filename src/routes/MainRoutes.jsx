@@ -11,6 +11,7 @@ import CourierProfile from "../pages/CourierPage/CourierProfile/CourierProfile";
 import CourierHistory from "../pages/CourierPage/CourierHistory/CourierHistory";
 import HistoryPage from "../pages/CourierPage/CourierHistory/HistoryPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import OrdersPage from "../pages/OrdersPage/OrdersPage";
 
 const MainRoutes = () => {
   return (
@@ -18,15 +19,17 @@ const MainRoutes = () => {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<HomePage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/user" element={<ProfilePage />} />
+          <Route path="/courier_history" element={<HistoryPage />} />
+          <Route path="/courier" element={<CourierPage />} />
+          <Route path="/courier_profile" element={<CourierProfile />} />
+          <Route path="/user" element={<ProfilePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/deliver" element={<DeliverPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
-        <Route path="/courier_history" element={<HistoryPage />} />
-        <Route path="/courier" element={<CourierPage />} />
-        <Route path="/courier_profile" element={<CourierProfile />} />
-        <Route path="/user" element={<ProfilePage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/deliver" element={<DeliverPage />} />
-        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>
   );

@@ -4,7 +4,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Grid from "@mui/material/Grid";
-import "./Form.css";
 
 const products = [
   {
@@ -17,12 +16,7 @@ const products = [
 ];
 
 const addresses = ["1 MUI Drive", "Reactville", "Anytown", "99999", "USA"];
-const payments = [
-  { name: "Card type", detail: "Visa" },
-  { name: "Card holder", detail: "Mr John Smith" },
-  { name: "Card number", detail: "xxxx-xxxx-xxxx-1234" },
-  { name: "Expiry date", detail: "04/2024" },
-];
+const payments = [{ name: "Card type", detail: "Visa" }];
 
 export default function Review() {
   return (
@@ -48,14 +42,14 @@ export default function Review() {
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Доставка
+            Shipping
           </Typography>
           <Typography gutterBottom>John Smith</Typography>
           <Typography gutterBottom>{addresses.join(", ")}</Typography>
         </Grid>
         <Grid item container direction="column" xs={12} sm={6}>
           <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Детали оплаты
+            Payment details
           </Typography>
           <Grid container>
             {payments.map((payment) => (

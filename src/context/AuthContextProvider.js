@@ -1,10 +1,17 @@
-import React, { createContext, useContext, useReducer } from "react";
-import { API_AUTH } from "../helpers/const";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
+import { API_LOGIN, API_REGISTER } from "../helpers/const";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
 //Создаем контект
 const authContext = createContext();
-
 //Создаем кастомный хук чтобы все получать значения из этого контекста
 export const useAuth = () => useContext(authContext);
 
@@ -20,7 +27,7 @@ const reducer = (state = INIT_STATE, action) => {
     case "SET_USER":
       return {
         ...state,
-        user: action.payload,
+        users: action.payload,
       };
     case "SET_ERROR":
       return {
@@ -34,28 +41,32 @@ const reducer = (state = INIT_STATE, action) => {
 
 const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   //Отправляем наши данные на API на определенный эндпоинт
   const register = async (user) => {
     try {
-      await axios.post(`${API_AUTH}/register/`, user);
-      alert("Успех");
+      await axios.post(`${API_REGISTER}`, user);
     } catch (error) {
-      console.warn(error);
       dispatch({
         type: "SET_ERROR",
         payload: error.response.data,
       });
+      setErrorMessage(error.response.data);
     }
   };
 
   const login = async (user) => {
     try {
-      let res = await axios.post(`${API_AUTH}/login/`, user);
-      alert("Успех");
-      localStorage.setItem("token", JSON.parse(res));
+      let res = await axios.post(`${API_LOGIN}`, user);
+      localStorage.setItem("token", JSON.stringify(res.data));
+      if (user) {
+        navigate("/");
+      } else {
+        alert("Что то пошло не так");
+      }
     } catch (error) {
-      console.warn(error);
       dispatch({
         type: "SET_ERROR",
         payload: error.response.data,
@@ -66,16 +77,35 @@ const AuthContextProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
-      let res = await axios.post(`${API_AUTH}/token/refresh`, {
+      let res = await axios.post(`http://34.16.134.60/api/v1/refresh/`, {
         refresh: token.refresh,
       });
-      localStorage.setItem("token", JSON.stringify(res));
+      localStorage.setItem("token", JSON.stringify(res.data));
     } catch (error) {
       console.log(error);
     }
   };
 
-  let values = { register, login };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      checkAuth();
+    } else {
+      // navigate("/login");
+    }
+  }, []);
+
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
+
+  let values = {
+    register,
+    login,
+    error: state.error,
+    users: state.users,
+    logout,
+  };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
 
