@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import ClearIcon from "@mui/icons-material/Clear";
 import "./Navbar.css";
@@ -8,11 +8,21 @@ import { Badge } from "@mui/base";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useAuth } from "../../context/AuthContextProvider";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   const [open, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { users, logout } = useAuth();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   const handleIconHover = () => {
     setIsOpen(true);
@@ -131,6 +141,27 @@ const Navbar = () => {
                         />
                         <p>Edit profile</p>
                       </div>
+
+                      <span>
+                        <ArrowForwardIosIcon />
+                      </span>
+                    </Link>
+                    <Link
+                      onClick={() => logout()}
+                      to="/"
+                      className="sub-menu-link"
+                    >
+                      <div className="edit-body">
+                        <LogoutIcon
+                          sx={{
+                            width: "2.4rem",
+                            height: "auto",
+                            marginRight: "1rem",
+                          }}
+                        />
+                        <p>Exit</p>
+                      </div>
+
                       <span>
                         <ArrowForwardIosIcon />
                       </span>

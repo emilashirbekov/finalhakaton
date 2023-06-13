@@ -53,8 +53,8 @@ export default function LoginPage() {
       password: "",
     },
     validationSchema,
-    onSubmit: async (values) => {
-      await login(values);
+    onSubmit: (values) => {
+      login(values);
     },
   });
 

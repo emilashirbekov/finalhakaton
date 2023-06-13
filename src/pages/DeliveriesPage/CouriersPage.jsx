@@ -12,9 +12,17 @@ import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { Button, TableCell } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 const CouriersPage = () => {
   const theme = useTheme();
-  const { getCouriers, couriers, deleteCouriers, changeAdopted } = useAdmin();
+  const {
+    getCouriers,
+    couriers,
+    deleteCouriers,
+    changeAdopted,
+    sortUbiv,
+    sortUVozr,
+  } = useAdmin();
   useEffect(() => {
     getCouriers();
   }, []);
@@ -23,7 +31,50 @@ const CouriersPage = () => {
     return obj;
   }
   return (
-    <div style={{ width: "60%", marginLeft: "5%" }}>
+    <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
+      <Box>
+        <h2 style={{}}>Курьеры JetkirKG</h2>
+        <Typography>Сортировка сотрудников</Typography>
+        <Box sx={{ display: "flex" }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Года</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Age"
+            >
+              <MenuItem value={10}>По возрастанию</MenuItem>
+              <MenuItem value={20}>По убыванию</MenuItem>
+            </Select>
+          </FormControl>
+
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Зарплата</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="salary"
+            >
+              <MenuItem
+                value={10}
+                onClick={(e) => {
+                  sortUVozr(couriers);
+                }}
+              >
+                По возрастанию
+              </MenuItem>
+              <MenuItem
+                value={20}
+                onClick={(e) => {
+                  sortUbiv(couriers);
+                }}
+              >
+                По убыванию
+              </MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+      </Box>
       {couriers.map((item) => (
         <Card
           key={item.id}

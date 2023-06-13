@@ -1,6 +1,14 @@
-import React, { createContext, useContext, useReducer, useEffect } from "react";
-import { API_REGISTER } from "../helpers/const";
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useState,
+} from "react";
+import { API_LOGIN, API_REGISTER } from "../helpers/const";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import RegisterPage from "../pages/RegisterPage/RegisterPage";
 
 //Создаем контект
 const authContext = createContext();
@@ -19,7 +27,7 @@ const reducer = (state = INIT_STATE, action) => {
     case "SET_USER":
       return {
         ...state,
-        user: action.payload,
+        users: action.payload,
       };
     case "SET_ERROR":
       return {
@@ -33,15 +41,32 @@ const reducer = (state = INIT_STATE, action) => {
 
 const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
 
   //Отправляем наши данные на API на определенный эндпоинт
   const register = async (user) => {
     try {
-      const res = await axios.post(`${API_REGISTER}/`, user);
-      // console.log(`${API_REGISTER}/register/`);
-      console.log(res);
+      await axios.post(`${API_REGISTER}`, user);
     } catch (error) {
-      console.log(error, "error");
+      dispatch({
+        type: "SET_ERROR",
+        payload: error.response.data,
+      });
+      setErrorMessage(error.response.data);
+    }
+  };
+
+  const login = async (user) => {
+    try {
+      let res = await axios.post(`${API_LOGIN}`, user);
+      localStorage.setItem("token", JSON.stringify(res.data));
+      if (user) {
+        navigate("/");
+      } else {
+        alert("Что то пошло не так");
+      }
+    } catch (error) {
       dispatch({
         type: "SET_ERROR",
         payload: error.response.data,
@@ -49,41 +74,38 @@ const AuthContextProvider = ({ children }) => {
     }
   };
 
-  // const login = async (user) => {
-  //   try {
-  //     let res = await axios.post(`${API_REGISTER}/login/`, user);
-  //     alert("Успех");
-  //     localStorage.setItem("token", JSON.parse(res));
-  //   } catch (error) {
-  //     console.warn(error);
-  //     dispatch({
-  //       type: "SET_ERROR",
-  //       payload: error.response.data,
-  //     });
-  //   }
-  // };
+  const checkAuth = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      let res = await axios.post(`${API_LOGIN}refresh`, {
+        refresh: token.refresh,
+      });
+      localStorage.setItem("token", JSON.stringify(res.data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  // const checkAuth = async () => {
-  //   try {
-  //     const token = JSON.parse(localStorage.getItem("token"));
-  //     let res = await axios.post(`${API_REGISTER}/refresh`, {
-  //       refresh: token.refresh,
-  //     });
-  //     localStorage.setItem("token", JSON.stringify(res));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      checkAuth();
+    } else {
+      // navigate("/login");
+    }
+  }, []);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem("token")) {
-  //     checkAuth();
-  //   } else {
-  //     navigate("/register");
-  //   }
-  // }, []);
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
 
-  let values = { register };
+  let values = {
+    register,
+    login,
+    error: state.error,
+    users: state.users,
+    logout,
+  };
   return <authContext.Provider value={values}>{children}</authContext.Provider>;
 };
 

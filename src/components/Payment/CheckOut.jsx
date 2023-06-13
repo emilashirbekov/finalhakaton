@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
@@ -14,6 +14,7 @@ import Review from "./Review";
 import { Paper } from "@mui/material";
 import "./Form.css";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContextProvider";
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -26,11 +27,19 @@ function Checkout() {
     setActiveStep(activeStep - 1);
   };
 
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { users } = useAuth();
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
   return (
     <>
-      {isLoggedIn ? (
+      {isLoggedIn && (
         <ThemeProvider theme={createTheme()}>
           <CssBaseline />
           <Container
@@ -95,8 +104,11 @@ function Checkout() {
             </Paper>
           </Container>
         </ThemeProvider>
-      ) : (
+      )}
+
+      {!isLoggedIn && (
         <div
+          id="form"
           style={{
             display: "flex",
             flexDirection: "column",

@@ -35,7 +35,7 @@ const validationSchema = Yup.object({
   password: Yup.string()
     .min(6, "Пароль должен содержать минимум 6 символов")
     .required("Введите ваш пароль"),
-  repeatPassword: Yup.string()
+  password_confirm: Yup.string()
     .min(6, "Подтвердите пароль")
     .required("Введите ваш пароль"),
 });
@@ -49,12 +49,11 @@ export default function RegisterPage() {
     initialValues: {
       email: "",
       password: "",
-      repeatPassword: "",
+      password_confirm: "",
     },
     validationSchema,
     onSubmit: async (values) => {
       await register(values);
-      console.log(values);
     },
   });
 
@@ -134,24 +133,23 @@ export default function RegisterPage() {
                 margin="normal"
                 required
                 fullWidth
-                name="repeatPassword"
-                label="Повторите пароль"
+                name="password_confirm"
+                label="Подтвердите ваш пароль"
                 type="password"
-                id="repeatPassword"
-                autoComplete="current-password"
+                id="password_confirm"
                 InputLabelProps={{
                   style: {
                     fontSize: "1.6rem",
                   },
                 }}
-                value={formik.values.repeatPassword}
+                value={formik.values.password_confirm}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
               />
-              {formik.errors.repeatPassword &&
-                formik.touched.repeatPassword && (
+              {formik.errors.password_confirm &&
+                formik.touched.password_confirm && (
                   <div className="error-message">
-                    {formik.errors.repeatPassword}
+                    {formik.errors.password_confirm}
                   </div>
                 )}
               <Button

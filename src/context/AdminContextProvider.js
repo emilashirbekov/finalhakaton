@@ -68,10 +68,31 @@ const AdminContextProvider = ({ children }) => {
     getCouriers();
   }
   // начало заказов
+  async function sortUbiv(coutiers) {
+    try {
+      let d = coutiers.sort((a, b) => b.salary - a.salary);
+      dispatch({ type: "GET_COURIERS", payload: d });
+    } catch (error) {
+      console.log(error, "sortubiv");
+    }
+  }
+  async function sortUVozr(coutiers) {
+    try {
+      let d = coutiers.sort((a, b) => a.salary - b.salary);
+      dispatch({ type: "GET_COURIERS", payload: d });
+    } catch (error) {
+      console.log(error, "sortubiv");
+    }
+  }
   async function getDeliveries() {
     try {
-      let res = await axios.get("http://localhost:7000/couriers");
-      dispatch({ type: "GET_COURIERS", payload: res.data });
+      let res = await axios.get("http://localhost:7000/deliveriers");
+      let d;
+      for (let i = 0; i < res.data; i++) {
+        if (res.data[i].adopted == "false") {
+          dispatch({ type: "GET_DELIVERIES", payload: res.data });
+        }
+      }
     } catch (error) {
       console.log(error);
     }
@@ -81,6 +102,10 @@ const AdminContextProvider = ({ children }) => {
     couriers: state.couriers,
     deleteCouriers,
     changeAdopted,
+    sortUbiv,
+    sortUVozr,
+    getDeliveries,
+    deliveries: state.deliveries,
     // expect,
     expectentions: state.expectentions,
   };

@@ -28,11 +28,9 @@
   font-size: 2em; /* Размер текста в относительных единицах */
   color: black;
   border-bottom: 4px solid grey;
-  padding-left: 8%;
+  padding-left: 6%;
 }
 
-.MainContainer {
-}
 /* @keyframes slideIn {
   0% {
     opacity: 0;
