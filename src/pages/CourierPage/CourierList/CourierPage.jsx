@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CourierNavbar from "../CourierNavbar";
 import CourierCard from "../CourierCard/CourierCard";
 import { Pagination } from "@mui/material";

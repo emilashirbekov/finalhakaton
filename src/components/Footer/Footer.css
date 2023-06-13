@@ -67,6 +67,10 @@
   .footer-heading {
     text-align: center;
   }
+  .footer ul li {
+    color: #767676;
+    background-color: transparent;
+  }
 }
 
 @media screen and (max-width: 767px) {

@@ -45,27 +45,16 @@ const validationSchema = Yup.object().shape({
 
 export default function LoginPage() {
   const { login } = useAuth();
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-
   const isSmallScreen = useMediaQuery("(max-width: 425px)");
 
   const formik = useFormik({
     initialValues: {
-      email: email,
-      password: password,
+      email: "",
+      password: "",
     },
     validationSchema,
-    onSubmit: (event, values) => {
-      event.preventDefault();
-      const formData = new FormData(event.currentTarget);
-      formData.append("email", values.email);
-      formData.append("password", values.password);
-      login(formData);
-    },
-    handleChange: (e) => {
-      setEmail(e.target.value);
-      setPassword(e.target.value);
+    onSubmit: (values) => {
+      login(values);
     },
   });
 
@@ -128,7 +117,6 @@ export default function LoginPage() {
               {formik.errors.email && formik.touched.email && (
                 <div className="error-message">{formik.errors.email}</div>
               )}
-
               <TextField
                 margin="normal"
                 required
@@ -177,10 +165,10 @@ export default function LoginPage() {
               <Grid container>
                 <Grid item xs>
                   <Link
+                    className="pass"
                     href="#"
                     variant="body2"
                     sx={{
-                      fontSize: "1.4rem",
                       color: "#57607b",
                       textDecoration: "underline",
                     }}

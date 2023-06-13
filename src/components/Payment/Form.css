@@ -100,15 +100,18 @@
   }
 }
 
-#form {
+.form {
   box-shadow: 1px 2px 15px 0px rgba(0, 0, 0, 0.2);
   -webkit-box-shadow: 1px 2px 15px 0px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 1px 2px 15px 0px rgba(0, 0, 0, 0.2);
   border-radius: 1.6rem;
 }
 
+.pass.MuiTypography-root {
+  font-size: 1.4rem !important;
+}
 .MuiTypography-root {
-  font-size: 2rem !important;
+  font-size: 1.4rem !important;
 }
 
 .MuiStepLabel-label {

@@ -22,19 +22,19 @@ const data = [
 
 const DeliveriesPage = () => {
   const { getCouriers, couriers, changeAdopted, expectentions } = useAdmin();
-  const [expectation, setExpectention] = useState(expectentions);
+
   useEffect(() => {
     getCouriers();
   }, []);
 
   const renderLineChart = (
     <LineChart
-      width={600}
+      width={500}
       height={300}
       data={data}
       margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
     >
-      <Line type="monotone" dataKey="uv" stroke="#b4b4f5" />
+      <Line type="monotone" dataKey="uv" stroke="blue" />
       <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
       <XAxis dataKey="name" />
       <YAxis />
@@ -60,7 +60,7 @@ const DeliveriesPage = () => {
             <ScubaDivingIcon fontSize="large"></ScubaDivingIcon>
           </IconButton>
           <span className="MainContain__Right__item__span">
-            Couriers : {couriers.length}
+            Couriers : {couriers.length - expectentions}
           </span>
         </div>
         <div className="MainContain__Right__item">

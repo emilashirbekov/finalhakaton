@@ -20,7 +20,7 @@ import Deliveriers from "../DeliveriesPage/Deliveriers";
 import CouriersPage from "../DeliveriesPage/CouriersPage";
 
 const pages = ["deliveries", "couriers", "chat"];
-const settings = ["Profile", "Dashboard", "Logout"];
+const settings = ["Profile", "Logout"];
 
 function AdminPage() {
   const [pageState, setStatePage] = React.useState(1);
@@ -84,8 +84,10 @@ function AdminPage() {
           <a class="animated-link">Admin chat</a>
           <a class="animated-link">Profile</a>
           <a class="animated-link">Logout</a>
-          <a class="animated-link">Couriers rezume</a>
-          <a class="animated-link">Home page</a>
+
+          <a class="animated-link" href="/">
+            Home page
+          </a>
         </nav>
       </div>
       <div
@@ -105,7 +107,7 @@ function AdminPage() {
           className="MainContainer"
           position="static"
           sx={{
-            background: "linear-gradient(to right, #b4b4f5,  blue, #b4b4f5)",
+            background: "linear-gradient(to right, #b4b4f5, #b4b4f5)",
           }}
         >
           <Container maxWidth="xl">
@@ -121,7 +123,7 @@ function AdminPage() {
                   setMenu(!menu);
                 }}
               >
-                <MenuIcon></MenuIcon>
+                <MenuIcon fontSize="large"></MenuIcon>
               </IconButton>
               <Typography
                 variant="h6"
@@ -159,15 +161,25 @@ function AdminPage() {
                 ADMIN PANEL
               </Typography>
               <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                {pages.map((page) => (
-                  <Button
-                    key={page}
-                    onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
-                  >
-                    {page}
-                  </Button>
-                ))}
+                <Button
+                  className=""
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    setStatePage(1);
+                  }}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Deliveries
+                </Button>
+                <Button
+                  onClick={() => {
+                    handleCloseNavMenu();
+                    setStatePage(2);
+                  }}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  Couriers
+                </Button>
               </Box>
 
               <Box sx={{ flexGrow: 0 }}>

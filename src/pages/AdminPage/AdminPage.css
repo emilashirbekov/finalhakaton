@@ -24,14 +24,13 @@
 .Meny-list a {
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 2em; /* Размер текста в относительных единицах */
   color: black;
   border-bottom: 4px solid grey;
+  padding-left: 6%;
 }
 
-.MainContainer {
-}
 /* @keyframes slideIn {
   0% {
     opacity: 0;

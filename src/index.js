@@ -12,14 +12,14 @@ import CourierContextProvider from "./context/CourierContextProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-    <CourierContextProvider>
-      <AdminContextProvider>
+    <AdminContextProvider>
+      <CourierContextProvider>
         <AuthContextProvider>
           <OrderContextProvider>
             <App />
           </OrderContextProvider>
         </AuthContextProvider>
-      </AdminContextProvider>
-    </CourierContextProvider>
+      </CourierContextProvider>
+    </AdminContextProvider>
   </BrowserRouter>
 );
