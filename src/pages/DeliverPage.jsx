@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import "../components/Payment/Form.css";
 import "../components/Hero/Hero.css";
 import Modal from "../components/Modal/Modal";
+import { useAdmin } from "../context/AdminContextProvider";
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Введите ваше имя"),
@@ -12,46 +13,34 @@ const validationSchema = Yup.object({
   pass: Yup.string().required("Введите ваш пасспорт"),
   techPass: Yup.string().required("Введите ваш тех паспорт"),
   photo: Yup.string().required("Укажите ваш транспорт"),
+  userPhoto: Yup.string().required("Добавьте ваше фото"),
 });
 
 const DeliverPage = () => {
-  const [formValue, setFormValue] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    pass: "",
-    techPass: "",
-    photo: "",
-  });
+  const { addCouriers } = useAdmin();
 
+  const [open, setOpen] = useState(false);
   const formik = useFormik({
     initialValues: {
-      name: formValue.name,
-      email: formValue.email,
-      phoneNumber: formValue.phoneNumber,
-      pass: formValue.pass,
-      techPass: formValue.techPass,
-      photo: formValue.photo,
+      name: "",
+      email: "",
+      phoneNumber: "",
+      pass: "",
+      techPass: "",
+      photo: "",
+      userPhoto: "",
     },
     validationSchema,
     onSubmit: (values) => {
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("email", values.email);
-      formData.append("phoneNumber", values.phoneNumber);
-      formData.append("pass", values.pass);
-      formData.append("techPass", values.techPass);
-      formData.append("photo", values.photo, values.photo.name);
-
-      setOpen(true);
-    },
-
-    handleChange: (e) => {
-      setFormValue({ ...formValue, [e.target.name]: e.target.value });
+      if (values) {
+        addCouriers(values);
+        setOpen(true);
+      } else {
+        setOpen(false);
+        alert("Что то пошло не так");
+      }
     },
   });
-
-  const [open, setOpen] = useState(false);
 
   return (
     <>
@@ -167,6 +156,23 @@ const DeliverPage = () => {
                   />
                   {formik.errors.photo && formik.touched.photo && (
                     <div className="error-message">{formik.errors.photo}</div>
+                  )}
+                </div>
+                <div>
+                  <label htmlFor="userPhoto">Ваше фото</label>
+                  <input
+                    id="userPhoto"
+                    type="file"
+                    name="userPhoto"
+                    onChange={(e) => {
+                      formik.setFieldValue("userPhoto", e.target.files[0]);
+                    }}
+                    onBlur={formik.handleBlur}
+                  />
+                  {formik.errors.userPhoto && formik.touched.userPhoto && (
+                    <div className="error-message">
+                      {formik.errors.userPhoto}
+                    </div>
                   )}
                 </div>
 

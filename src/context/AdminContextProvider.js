@@ -63,6 +63,16 @@ const AdminContextProvider = ({ children }) => {
       getCouriers();
     } catch (error) {}
   }
+
+  async function addCouriers(newCourier) {
+    try {
+      await axios.post(`http://localhost:7000/couriers/`, newCourier);
+      getCouriers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function changeAdopted(id, obj) {
     axios.patch(`http://localhost:7000/couriers/${id}`, obj);
     getCouriers();
@@ -100,6 +110,7 @@ const AdminContextProvider = ({ children }) => {
   let values = {
     getCouriers,
     couriers: state.couriers,
+    addCouriers,
     deleteCouriers,
     changeAdopted,
     sortUbiv,
