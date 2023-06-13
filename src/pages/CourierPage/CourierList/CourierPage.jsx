@@ -9,7 +9,12 @@ const CourierPage = () => {
       <CourierNavbar />
       <CourierCard />
       <Pagination
-        sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "20px",
+        }}
         count={10}
         color="primary"
         variant="outlined"
