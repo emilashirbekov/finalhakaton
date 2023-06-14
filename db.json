@@ -1,7 +1,47 @@
 {
   "deliveriers": [
     {
-      "id": 1,
+      "id": 2,
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "true"
+    },
+    {
+      "id": 3,
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "true"
+    },
+    {
+      "id": 4,
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "false"
+    },
+    {
+      "id": 5,
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "false"
+    },
+    {
+      "id": 6,
+      "name": "Emka",
+      "surname": "Ashirbekov",
+      "form": "Bishkek",
+      "to": "osh",
+      "adopted": "false"
+    },
+    {
+      "id": 7,
       "name": "Emka",
       "surname": "Ashirbekov",
       "form": "Bishkek",
@@ -13,36 +53,52 @@
     {
       "id": 1,
       "phoneNumber": "+996 999 999 999",
-      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
       "adopted": "true",
+      "email": "214",
       "salary": 9320,
-      "FLL": "Emil Ashirbekov"
+      "FLL": "Emil Ashir",
+      "texPasport": "23456"
     },
     {
       "id": 3,
       "phoneNumber": "+996 999 999 999",
-      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
       "adopted": "true",
       "salary": 300,
-      "FLL": "Emil Ashirbekov"
+      "email": "214",
+      "FLL": "Bayel",
+      "texPasport": "23456"
     },
     {
       "id": 6,
       "phoneNumber": "+996 999 999 999",
-      "photo": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
       "salary": 5600,
-      "FLL": "Emil Ashirbekov"
-    }
-<<<<<<< HEAD
-  ],
-  "couriers": [
+      "email": "214",
+      "FLL": "Emil Ashirbekov",
+      "texPasport": "23456"
+    },
     {
-      "id": 3,
-      "phoneNumber": "0709465239",
-      "salary": "345"
+      "id": 7,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "false",
+      "email": "214",
+      "salary": 300,
+      "FLL": "Bayel Ash",
+      "texPasport": "23456"
+    },
+    {
+      "id": 8,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "false",
+      "salary": 300,
+      "email": "214",
+      "FLL": "Bayel Ash",
+      "texPasport": "23456"
     }
-=======
->>>>>>> b88db6267a819a80de3e0df0ae3c25e1bec0569e
   ]
 }

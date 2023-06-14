@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAdmin } from "../../context/AdminContextProvider";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -13,6 +13,7 @@ import SkipNextIcon from "@mui/icons-material/SkipNext";
 import { Button, TableCell } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+
 const CouriersPage = () => {
   const theme = useTheme();
   const {
@@ -22,6 +23,7 @@ const CouriersPage = () => {
     changeAdopted,
     sortUbiv,
     sortUVozr,
+    changeCouriers,
   } = useAdmin();
   useEffect(() => {
     getCouriers();
@@ -30,24 +32,34 @@ const CouriersPage = () => {
     obj.adopted = "true";
     return obj;
   }
+  const [value, setValue] = useState("");
+
+  // filter
+  const filteredCouries = couriers.filter((item) => {
+    return item.FLL.toLowerCase().includes(value.toLowerCase());
+  });
+  // filter
+  const [idCouriers, setIdCouriers] = useState();
+  const [FLL, setFLL] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [salary, setSalary] = useState();
+  const [photoAuto, setPhotoAuto] = useState();
+  const [texPasport, settexPasport] = useState();
+  function handleChange(obj) {
+    obj.salary = salary;
+    obj.email = email;
+    obj.phoneNumber = phoneNumber;
+    obj.texPasport = texPasport;
+    obj.FLL = FLL;
+    return obj;
+  }
   return (
     <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
       <Box>
         <h2 style={{}}>Курьеры JetkirKG</h2>
         <Typography>Сортировка сотрудников</Typography>
         <Box sx={{ display: "flex" }}>
-          <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Года</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              label="Age"
-            >
-              <MenuItem value={10}>По возрастанию</MenuItem>
-              <MenuItem value={20}>По убыванию</MenuItem>
-            </Select>
-          </FormControl>
-
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">Зарплата</InputLabel>
             <Select
@@ -73,89 +85,226 @@ const CouriersPage = () => {
               </MenuItem>
             </Select>
           </FormControl>
+          <TextField
+            label="Ищите по названию"
+            onChange={(e) => setValue(e.target.value)}
+          ></TextField>
         </Box>
       </Box>
-      {couriers.map((item) => (
-        <Card
-          key={item.id}
-          sx={{ display: "flex", border: "1px solid black", marginTop: "20px" }}
-        >
-          <CardMedia
-            component="img"
-            sx={{ width: 151, height: "150" }}
-            image={item.photo}
-            alt="курьер не оставил фото"
-          />
-          <Box sx={{ width: "100%" }}>
-            <Box
-              sx={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-between",
-              }}
-            >
-              <TableCell
+      {filteredCouries.map((item) => {
+        return item.id == idCouriers ? (
+          <Card
+            key={item.id}
+            sx={{
+              display: "flex",
+              border: "1px solid black",
+              marginTop: "20px",
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{ width: 151, height: "150" }}
+              image={item.photoAuto}
+              alt="курьер не оставил фото"
+            />
+            <Box sx={{ width: "100%" }}>
+              <Box
                 sx={{
-                  width: "50%",
-                  borderRight: "1px solid #rgba(224, 224, 224, 1);",
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
                 }}
               >
-                Фамилия Имя :
-                <TextField
-                  id="standard-basic"
-                  variant="standard"
-                  value={item.FLL}
-                ></TextField>
-              </TableCell>
-              <TableCell sx={{ width: "50%" }}>
-                Номер телефона :{" "}
-                <TextField
-                  id="standard-basic"
-                  variant="standard"
-                  value={item.phoneNumber}
-                ></TextField>{" "}
-              </TableCell>
-            </Box>
+                <TableCell
+                  sx={{
+                    width: "50%",
+                    borderRight: "1px solid #rgba(224, 224, 224, 1);",
+                  }}
+                >
+                  <TextField
+                    id="standard-basic"
+                    variant="standard"
+                    value={FLL}
+                    label="FLL"
+                    onChange={(e) => setFLL(e.target.value)}
+                  ></TextField>
+                </TableCell>
+                <TableCell sx={{ width: "50%" }}>
+                  <TextField
+                    id="standard-basic"
+                    variant="standard"
+                    label="phoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  ></TextField>{" "}
+                </TableCell>
+              </Box>
 
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-              <TextField
-                sx={{ marginTop: "2%", width: "20%" }}
-                required
-                id="outlined-required"
-                label="Salary"
-                defaultValue="Hello World"
-                value={item.salary}
-              />
-              <Button sx={{ width: "50%", margin: "auto", color: "gray" }}>
-                Изменить курьера
-              </Button>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <TextField
+                  sx={{ marginTop: "2%", width: "20%", marginLeft: "3%" }}
+                  required
+                  id="outlined-required"
+                  label="salary"
+                  value={salary}
+                  onChange={(e) => setSalary(e.target.value)}
+                ></TextField>{" "}
+                <TextField
+                  sx={{ marginTop: "2%", width: "20%" }}
+                  required
+                  id="outlined-required"
+                  label="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                ></TextField>
+                <TextField
+                  sx={{ marginTop: "2%", width: "20%" }}
+                  required
+                  id="outlined-required"
+                  label="texpasport"
+                  value={texPasport}
+                  onChange={(e) => settexPasport(e.target.value)}
+                ></TextField>
+                <Button
+                  sx={{ width: "50%", margin: "auto", color: "gray" }}
+                  onClick={(e) => {
+                    setIdCouriers("");
+
+                    changeCouriers(item.id, handleChange(item));
+                  }}
+                >
+                  Coхранить изменения курьера
+                </Button>
+              </Box>
             </Box>
-          </Box>
-          {item.adopted == "true" ? (
-            <Button
-              sx={{ color: "red" }}
-              onClick={() => deleteCouriers(item.id)}
-            >
-              Уволить сотрудника
-            </Button>
-          ) : (
-            <Box>
+            {item.adopted == "true" ? (
               <Button
-                onClick={(e) => changeAdopted(item.id, handlechange(item))}
-                sx={{ color: "green", height: "50%", width: "100%" }}
+                sx={{ color: "red" }}
+                onClick={() => deleteCouriers(item.id)}
               >
-                Принять
+                Уволить сотрудника
               </Button>
-              <Button
-                onClick={deleteCouriers()}
-                sx={{ color: "red", height: "50%", width: "100%" }}
+            ) : (
+              <Box>
+                <Button
+                  onClick={(e) => changeAdopted(item.id, handlechange(item))}
+                  sx={{ color: "green", height: "50%", width: "100%" }}
+                >
+                  Принять
+                </Button>
+                <Button
+                  onClick={deleteCouriers()}
+                  sx={{ color: "red", height: "50%", width: "100%" }}
+                >
+                  Отклонить
+                </Button>
+              </Box>
+            )}
+          </Card>
+        ) : (
+          <Card
+            key={item.id}
+            sx={{
+              display: "flex",
+              border: "1px solid black",
+              marginTop: "20px",
+            }}
+          >
+            <CardMedia
+              component="img"
+              sx={{ width: 151, height: "150" }}
+              image={item.photoAuto}
+              alt="курьер не оставил фото"
+            />
+            <Box sx={{ width: "100%" }}>
+              <Box
+                sx={{
+                  width: "100%",
+                  display: "flex",
+                  justifyContent: "space-between",
+                }}
               >
-                Отклонить
-              </Button>
+                <TableCell
+                  sx={{
+                    width: "50%",
+                    borderRight: "1px solid #rgba(224, 224, 224, 1);",
+                  }}
+                >
+                  Фамилия Имя :
+                  <Typography
+                    id="standard-basic"
+                    variant="standard"
+                    value={item.FLL}
+                  >
+                    {item.FLL}
+                  </Typography>
+                </TableCell>
+                <TableCell sx={{ width: "50%" }}>
+                  Номер телефона :{" "}
+                  <Typography id="standard-basic" variant="standard">
+                    {item.phoneNumber}
+                  </Typography>{" "}
+                </TableCell>
+              </Box>
+
+              <Box sx={{ display: "flex" }}>
+                <Typography
+                  sx={{ marginTop: "2%", width: "20%", marginLeft: "3%" }}
+                  required
+                  id="outlined-required"
+                >
+                  Заработная плата: ${item.salary}
+                </Typography>{" "}
+                <Typography
+                  sx={{ marginTop: "2%", width: "20%" }}
+                  required
+                  id="outlined-required"
+                >
+                  Email : {item.email}
+                </Typography>
+                {item.adopted == "true" ? (
+                  <Button
+                    sx={{ width: "50%", margin: "auto", color: "gray" }}
+                    onClick={(e) => {
+                      setIdCouriers(item.id);
+                      setFLL(item.FLL);
+                      setEmail(item.email);
+                      setPhoneNumber(item.phoneNumber);
+                      setSalary(item.salary);
+                      settexPasport(item.texPasport);
+                    }}
+                  >
+                    Изменить курьера
+                  </Button>
+                ) : null}
+              </Box>
             </Box>
-          )}
-        </Card>
-      ))}
+            {item.adopted == "true" ? (
+              <Button
+                sx={{ color: "red" }}
+                onClick={() => deleteCouriers(item.id)}
+              >
+                Уволить сотрудника
+              </Button>
+            ) : (
+              <Box>
+                <Button
+                  onClick={(e) => changeAdopted(item.id, handlechange(item))}
+                  sx={{ color: "green", height: "50%", width: "100%" }}
+                >
+                  Принять
+                </Button>
+                <Button
+                  onClick={deleteCouriers()}
+                  sx={{ color: "red", height: "50%", width: "100%" }}
+                >
+                  Отклонить
+                </Button>
+              </Box>
+            )}
+          </Card>
+        );
+      })}
     </div>
   );
 };

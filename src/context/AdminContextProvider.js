@@ -1,6 +1,6 @@
-import { LocalLaundryService } from "@mui/icons-material";
+import { AspectRatio, LocalLaundryService } from "@mui/icons-material";
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 const adminContext = createContext();
 export const useAdmin = () => useContext(adminContext);
 const INIT_STATE = {
@@ -35,6 +35,7 @@ function reducer(state = INIT_STATE, action) {
 
 const AdminContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
+
   function getUser() {
     try {
       let res = JSON.parse(localStorage.getItem("token"));
@@ -46,9 +47,7 @@ const AdminContextProvider = ({ children }) => {
     try {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
-      const count = state.couriers.filter(
-        (obj) => obj.adopted === "false"
-      ).length;
+      const count = res.data.filter((obj) => obj.adopted === "false").length;
       dispatch({
         type: "GET_EXPECTENTIONS",
         payload: count,
@@ -84,15 +83,37 @@ const AdminContextProvider = ({ children }) => {
       console.log(error, "sortubiv");
     }
   }
+  async function changeCouriers(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/couriers/${id}`, obj);
+      getCouriers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // deliveries
   async function getDeliveries() {
     try {
       let res = await axios.get("http://localhost:7000/deliveriers");
-      let d;
-      for (let i = 0; i < res.data; i++) {
-        if (res.data[i].adopted == "false") {
-          dispatch({ type: "GET_DELIVERIES", payload: res.data });
-        }
-      }
+      const filteredData = res.data.filter((obj) => obj.adopted === "false");
+      dispatch({ type: "GET_DELIVERIES", payload: filteredData });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function changeAdoptedDeli(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/deliveriers/${id}`, obj);
+      getDeliveries();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deleteDeliveriers(id) {
+    try {
+      await axios.delete(`http://localhost:7000/deliveriers/${id}`);
+      getDeliveries();
     } catch (error) {
       console.log(error);
     }
@@ -105,9 +126,12 @@ const AdminContextProvider = ({ children }) => {
     sortUbiv,
     sortUVozr,
     getDeliveries,
+    changeAdoptedDeli,
     deliveries: state.deliveries,
+    deleteDeliveriers,
     // expect,
     expectentions: state.expectentions,
+    changeCouriers,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
