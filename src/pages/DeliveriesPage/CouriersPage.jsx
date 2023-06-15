@@ -3,13 +3,11 @@ import { useAdmin } from "../../context/AdminContextProvider";
 import { useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
+
 import CardMedia from "@mui/material/CardMedia";
-import IconButton from "@mui/material/IconButton";
+
 import Typography from "@mui/material/Typography";
-import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import SkipNextIcon from "@mui/icons-material/SkipNext";
+
 import { Button, TableCell } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
@@ -36,11 +34,11 @@ const CouriersPage = () => {
 
   // filter
   const filteredCouries = couriers.filter((item) => {
-    return item.FLL.toLowerCase().includes(value.toLowerCase());
+    return item.name.toLowerCase().includes(value.toLowerCase());
   });
   // filter
   const [idCouriers, setIdCouriers] = useState();
-  const [FLL, setFLL] = useState();
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [salary, setSalary] = useState();
@@ -52,7 +50,7 @@ const CouriersPage = () => {
     obj.email = email;
     obj.phoneNumber = phoneNumber;
     obj.techPass = techPass;
-    obj.FLL = FLL;
+    obj.name = name;
     obj.pass = pass;
     return obj;
   }
@@ -107,7 +105,7 @@ const CouriersPage = () => {
             <CardMedia
               component="img"
               sx={{ width: 151, height: "150" }}
-              image={item.photoAuto}
+              image={item.photo}
               alt="курьер не оставил фото"
             />
             <Box sx={{ width: "100%" }}>
@@ -127,9 +125,9 @@ const CouriersPage = () => {
                   <TextField
                     id="standard-basic"
                     variant="standard"
-                    value={FLL}
-                    label="FLL"
-                    onChange={(e) => setFLL(e.target.value)}
+                    value={name}
+                    label="name"
+                    onChange={(e) => setName(e.target.value)}
                   ></TextField>
                 </TableCell>
                 <TableCell sx={{ width: "50%" }}>
@@ -188,6 +186,12 @@ const CouriersPage = () => {
                 </Button>
               </Box>
             </Box>
+            <CardMedia
+              component="img"
+              sx={{ width: 151, height: "150" }}
+              image={item.photoUser}
+              alt="курьер не оставил фото"
+            />
             {item.adopted == "true" ? (
               <Button
                 sx={{ color: "red" }}
@@ -204,7 +208,7 @@ const CouriersPage = () => {
                   Принять
                 </Button>
                 <Button
-                  onClick={deleteCouriers()}
+                  onClick={(e) => deleteCouriers(item.id)}
                   sx={{ color: "red", height: "50%", width: "100%" }}
                 >
                   Отклонить
@@ -245,9 +249,9 @@ const CouriersPage = () => {
                   <Typography
                     id="standard-basic"
                     variant="standard"
-                    value={item.FLL}
+                    value={item.name}
                   >
-                    {item.FLL}
+                    {item.name}
                   </Typography>
                 </TableCell>
                 <TableCell sx={{ width: "50%" }}>
@@ -278,7 +282,7 @@ const CouriersPage = () => {
                     sx={{ width: "50%", margin: "auto", color: "gray" }}
                     onClick={(e) => {
                       setIdCouriers(item.id);
-                      setFLL(item.FLL);
+                      setName(item.name);
                       setEmail(item.email);
                       setPhoneNumber(item.phoneNumber);
                       setSalary(item.salary);
@@ -291,10 +295,11 @@ const CouriersPage = () => {
                 ) : null}
               </Box>
             </Box>
+
             {item.adopted == "true" ? (
               <Button
                 sx={{ color: "red" }}
-                onClick={() => deleteCouriers(item.id)}
+                onClick={(e) => deleteCouriers(item.id)}
               >
                 Уволить сотрудника
               </Button>
@@ -307,7 +312,7 @@ const CouriersPage = () => {
                   Принять
                 </Button>
                 <Button
-                  onClick={deleteCouriers()}
+                  onClick={(e) => deleteCouriers(item.id)}
                   sx={{ color: "red", height: "50%", width: "100%" }}
                 >
                   Отклонить

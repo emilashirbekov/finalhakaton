@@ -22,13 +22,16 @@ const DeliverPage = () => {
   const [open, setOpen] = useState(false);
   const formik = useFormik({
     initialValues: {
-      FLL: "",
+      name: "",
       email: "",
       phoneNumber: "",
       pass: "",
       techPass: "",
       photo: "",
       userPhoto: "",
+      adopted: "false",
+      rating: 0,
+      lakes: 10,
     },
     validationSchema,
     onSubmit: (values) => {
@@ -65,18 +68,18 @@ const DeliverPage = () => {
                 action="#"
               >
                 <div>
-                  <label htmlFor="FLL">Фамилия и Имя</label>
+                  <label htmlFor="name">Фамилия и Имя</label>
                   <input
-                    id="FLL"
-                    name="FLL"
+                    id="name"
+                    name="name"
                     type="text"
-                    placeholder="FLL"
-                    value={formik.values.FLL}
+                    placeholder="name"
+                    value={formik.values.name}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  {formik.errors.FLL && formik.touched.FLL && (
-                    <div className="error-message">{formik.errors.FLL}</div>
+                  {formik.errors.name && formik.touched.name && (
+                    <div className="error-message">{formik.errors.name}</div>
                   )}
                 </div>
                 <div>
@@ -147,11 +150,9 @@ const DeliverPage = () => {
                   <label htmlFor="photo">Фото транспорта</label>
                   <input
                     id="photo"
-                    type="file"
+                    type="text"
                     name="photo"
-                    onChange={(e) => {
-                      formik.setFieldValue("photo", e.target.files[0]);
-                    }}
+                    onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
                   {formik.errors.photo && formik.touched.photo && (
@@ -162,11 +163,9 @@ const DeliverPage = () => {
                   <label htmlFor="userPhoto">Ваше фото</label>
                   <input
                     id="userPhoto"
-                    type="file"
+                    type="text"
                     name="userPhoto"
-                    onChange={(e) => {
-                      formik.setFieldValue("userPhoto", e.target.files[0]);
-                    }}
+                    onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
                   {formik.errors.userPhoto && formik.touched.userPhoto && (

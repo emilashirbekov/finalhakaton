@@ -10,12 +10,24 @@ import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useAuth } from "../../context/AuthContextProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useOrder } from "../../context/OrderContextProvider";
+import { useAdmin } from "../../context/AdminContextProvider";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   const [open, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { allorders, getOrders } = useOrder();
+  const { getCouriers, couriers } = useAdmin();
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+  useEffect(() => {
+    getCouriers();
+  }, []);
   const { users, logout } = useAuth();
+  const [courier, setCourier] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
@@ -23,6 +35,7 @@ const Navbar = () => {
       setIsLoggedIn(false);
     }
   }, []);
+  useEffect(() => {}, []);
 
   const handleIconHover = () => {
     setIsOpen(true);
@@ -38,7 +51,25 @@ const Navbar = () => {
       targetElement.scrollIntoView({ behavior: "smooth" });
     }
   };
+  function estLi() {
+    let d = JSON.parse(localStorage.getItem("user"));
+    for (let i = 0; i < couriers.length; i++) {
+      console.log(d);
+      if (couriers[i].email == d.email && couriers[i].adopted == "true") {
+        setCourier(true);
+      }
 
+      // if (courier[i].email == d.email && courier[i].adopted == "true")
+      //   setCourier(true);
+      // if (couriers[i].email == d.email && couriers.adopted == "true")
+      //   setCourier(true);
+    }
+    console.log(courier);
+  }
+
+  useEffect(() => {
+    estLi();
+  }, []);
   return (
     <>
       <header>
@@ -81,9 +112,15 @@ const Navbar = () => {
             </li>
             {isLoggedIn && (
               <li>
-                <Link to="/deliver" className="deliver">
-                  Стать курьером
-                </Link>
+                {courier ? (
+                  <Link to="/courier" className="deliver">
+                    Заказы для курьеров
+                  </Link>
+                ) : (
+                  <Link to="/deliver" className="deliver">
+                    Стать курьером
+                  </Link>
+                )}
               </li>
             )}
             {isLoggedIn && (
@@ -95,7 +132,11 @@ const Navbar = () => {
                       sx={{ padding: 0, margin: 0 }}
                       aria-label="show 17 new notifications"
                     >
-                      <Badge badgeContent={0} component={Link} to="/bag">
+                      <Badge
+                        badgeContent={allorders.length}
+                        component={Link}
+                        to="/bag"
+                      >
                         <ShoppingBagIcon
                           sx={{ color: "#fff" }}
                           fontSize="large"

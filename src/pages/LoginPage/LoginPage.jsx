@@ -103,6 +103,7 @@ export default function LoginPage() {
                   email,
                   password,
                 };
+                localStorage.setItem("user", obj);
                 let d;
                 for (let i = 0; i < admin.length; i++) {
                   if (
@@ -200,6 +201,7 @@ export default function LoginPage() {
                     password,
                   };
                   let d;
+                  localStorage.setItem("user", JSON.stringify(obj));
                   for (let i = 0; i < admin.length; i++) {
                     if (
                       obj.email == admin[i].email &&

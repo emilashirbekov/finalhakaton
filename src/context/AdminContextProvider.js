@@ -3,7 +3,6 @@ import axios from "axios";
 import React, { createContext, useContext, useReducer, useState } from "react";
 const adminContext = createContext();
 export const useAdmin = () => useContext(adminContext);
-
 const INIT_STATE = {
   isAdmin: false,
   deliveries: [],
@@ -11,10 +10,10 @@ const INIT_STATE = {
   couriersTrue: [],
   expectentions: 0,
   totalPage: 0,
+  likes: 0,
   user: "",
   deliveries_true: [],
 };
-
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
     case "ISADMIN": {
@@ -33,7 +32,7 @@ function reducer(state = INIT_STATE, action) {
       return { ...state, couriers: action.payload };
     }
     case "INCREMENT_LIKES": {
-      return { ...state, couriers: action.payload };
+      return { ...state, likes: action.payload };
     }
     case "INCREMENT_RATING": {
       return { ...state, couriers: action.payload };
@@ -69,18 +68,10 @@ const AdminContextProvider = ({ children }) => {
     try {
       await axios.delete(`http://localhost:7000/couriers/${id}`);
       getCouriers();
-    } catch (error) {}
-  }
-
-  async function addCouriers(newCourier) {
-    try {
-      await axios.post(`http://localhost:7000/couriers/`, newCourier);
-      getCouriers();
     } catch (error) {
       console.log(error);
     }
   }
-
   async function changeAdopted(id, obj) {
     axios.patch(`http://localhost:7000/couriers/${id}`, obj);
     getCouriers();
@@ -139,63 +130,27 @@ const AdminContextProvider = ({ children }) => {
       console.log(error);
     }
   }
-  async function incrementLikes(id) {
+  async function addCouriers(newCourier) {
     try {
-      const updatedCouriers = state.couriers.map((courier) => {
-        if (courier.id === id) {
-          return {
-            ...courier,
-            likes: courier.likes + 1,
-          };
-        }
-        return courier;
-      });
-
-      await axios.patch(`http://localhost:7000/couriers/${id}`, {
-        likes: updatedCouriers.find((courier) => courier.id === id).likes,
-      });
-
-      dispatch({ type: "INCREMENT_LIKES", payload: updatedCouriers });
-    } catch (e) {
-      console.log(e);
+      await axios.post(`http://localhost:7000/couriers/`, newCourier);
+      getDeliveries();
+    } catch (error) {
+      console.log(error);
     }
   }
-  async function addRating(id, value) {
-    try {
-      const updatedCouriers = state.couriers.map((courier) => {
-        if (courier.id === id) {
-          return {
-            ...courier,
-            rating: value,
-          };
-        }
-        return courier;
-      });
-
-      await axios.patch(`http://localhost:7000/couriers/${id}`, {
-        rating: updatedCouriers.find((courier) => courier.id === id).rating,
-      });
-
-      dispatch({ type: "INCREMENT_RATING", payload: updatedCouriers });
-    } catch (e) {
-      console.warn(e);
-    }
-  }
-
   let values = {
     getCouriers,
-    addRating,
     couriers: state.couriers,
-    addCouriers,
     deleteCouriers,
     changeAdopted,
-    incrementLikes,
     sortUbiv,
     sortUVozr,
+    addCouriers,
     getDeliveries,
     changeAdoptedDeli,
     deliveries: state.deliveries,
     deleteDeliveriers,
+    // expect,
     expectentions: state.expectentions,
     changeCouriers,
     couriersTrue: state.couriersTrue,

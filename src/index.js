@@ -11,12 +11,12 @@ import AdminContextProvider from "./context/AdminContextProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-  <AdminContextProvider>
-    <AuthContextProvider>
-      <OrderContextProvider>
-        <App />
-      </OrderContextProvider>
-    </AuthContextProvider>
-  </AdminContextProvider>
+    <AdminContextProvider>
+      <AuthContextProvider>
+        <OrderContextProvider>
+          <App />
+        </OrderContextProvider>
+      </AuthContextProvider>
+    </AdminContextProvider>
   </BrowserRouter>
 );

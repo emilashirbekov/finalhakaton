@@ -9,9 +9,13 @@ import { useFormik } from "formik";
 import { TextareaAutosize } from "@mui/base";
 import { useOrder } from "../../context/OrderContextProvider";
 import { Button, Typography } from "@mui/material";
+import Modal from "../Modal/Modal";
 
 export default function AddressFormPage() {
   const { addOrder } = useOrder();
+
+  const [price, setPrice] = useState(0);
+  const [open, setOpen] = useState(false);
 
   const validationSchema = Yup.object().shape({
     phone_sender: Yup.string().required("Введите ваш номер телефона"),
@@ -43,11 +47,15 @@ export default function AddressFormPage() {
     },
     validationSchema,
     onSubmit: async (values) => {
-      addOrder(values);
+      if (values) {
+        addOrder(values);
+        setOpen(true);
+      } else {
+        setOpen(false);
+        alert("Что то пошло не так");
+      }
     },
   });
-
-  const [price, setPrice] = useState(0);
 
   useEffect(() => {
     const weight = parseFloat(formik.values.weight);
@@ -68,6 +76,7 @@ export default function AddressFormPage() {
   return (
     <React.Fragment>
       <Grid onSubmit={formik.handleSubmit} container spacing={3}>
+        <Modal isOpen={open} onClose={() => setOpen(false)} />
         <Grid item xs={12} sm={6}>
           <TextField
             required

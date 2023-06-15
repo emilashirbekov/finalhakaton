@@ -5,13 +5,13 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 const orderContext = createContext();
 
 export const useOrder = () => useContext(orderContext);
-
+const LIMIT = 3;
 const INIT_STATE = {
   orders: [],
   allorders: [],
   totalSum: 0,
 };
-
+const API = "http://localhost:7000/deliveriers";
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_ORDERS":
@@ -51,14 +51,16 @@ const OrderContextProvider = ({ children }) => {
   const getOrders = async () => {
     try {
       // const config = getAuth();
-      const res = await axios(
-        `http://localhost:7000/deliveriers/${window.location.search}`
+      let res = await axios(
+        `${API}${window.location.search || `?_limit=${LIMIT}`}`
       );
+      const totalPages = Math.ceil(res.headers["x-total-count"] / LIMIT);
       const trued = res.data.filter((obj) => obj.adopted === "true");
+
       dispatch({ type: "GET_ORDERS", payload: trued });
       dispatch({
-        type: "GET_TOTAL_PAGE",
-        payload: Math.ceil(res.data.count / 6),
+        type: "GET_PAGE",
+        payload: totalPages,
       });
       dispatch({ type: "GET_ALLORDERS", payload: res.data });
       let d = res.data.reduce((total, item) => total + item.price, 0);
@@ -76,14 +78,23 @@ const OrderContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-
+  async function changeAdoptedDeli(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/deliveriers/${id}`, obj);
+      getOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const values = {
     orders: state.orders,
     getOrders,
     addOrder,
     allorders: state.allorders,
     totalSum: state.totalSum,
+    changeAdoptedDeli,
   };
+
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>
   );
