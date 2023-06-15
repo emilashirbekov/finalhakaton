@@ -5,7 +5,6 @@ const CourierContextProvider = ({ children }) => {
   const getOrders = () => {};
   const acceptOrders = () => {};
 
-  GET_ORDER();
   return <courierContext.Provider>{children}</courierContext.Provider>;
 };
 

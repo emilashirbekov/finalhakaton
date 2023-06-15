@@ -26,7 +26,7 @@ const getAuth = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const Authorization = `Bearer ${token.access}`;
   const config = {
-    header: {
+    headers: {
       Authorization,
     },
   };
