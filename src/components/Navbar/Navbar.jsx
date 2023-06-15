@@ -52,19 +52,17 @@ const Navbar = () => {
     }
   };
   function estLi() {
-    let d = JSON.parse(localStorage.getItem("user"));
-    for (let i = 0; i < couriers.length; i++) {
-      console.log(d);
-      if (couriers[i].email == d.email && couriers[i].adopted == "true") {
-        setCourier(true);
+    try {
+      let d = JSON.parse(localStorage.getItem("user"));
+      for (let i = 0; i < couriers.length; i++) {
+        console.log(d);
+        if (couriers[i].email == d.email && couriers[i].adopted == "true") {
+          setCourier(true);
+        }
       }
-
-      // if (courier[i].email == d.email && courier[i].adopted == "true")
-      //   setCourier(true);
-      // if (couriers[i].email == d.email && couriers.adopted == "true")
-      //   setCourier(true);
+    } catch (error) {
+      console.log(error);
     }
-    console.log(courier);
   }
 
   useEffect(() => {
