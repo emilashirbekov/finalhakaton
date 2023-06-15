@@ -11,7 +11,12 @@ import { useOrder } from "../../../context/OrderContextProvider";
 
 export default function CourierCard({ item, number }) {
   const [isFlyAway, setFlyAway] = React.useState(false);
-  const { changeAdoptedDeli } = useOrder();
+  const { changeAdoptedDeli, getOrders } = useOrder();
+
+  React.useEffect(() => {
+    getOrders();
+  }, []);
+
   const handleFlyAway = () => {
     setFlyAway(true);
   };

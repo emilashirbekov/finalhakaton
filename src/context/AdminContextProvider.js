@@ -120,6 +120,14 @@ const AdminContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+  async function addCouriers(newCourier) {
+    try {
+      await axios.post(`http://localhost:7000/deliveriers/`, newCourier);
+      getDeliveries();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   let values = {
     getCouriers,
     couriers: state.couriers,
@@ -127,6 +135,7 @@ const AdminContextProvider = ({ children }) => {
     changeAdopted,
     sortUbiv,
     sortUVozr,
+    addCouriers,
     getDeliveries,
     changeAdoptedDeli,
     deliveries: state.deliveries,

@@ -5,7 +5,7 @@ import React, { createContext, useContext, useEffect, useReducer } from "react";
 const orderContext = createContext();
 
 export const useOrder = () => useContext(orderContext);
-const LIMIT = 5;
+const LIMIT = 3;
 const INIT_STATE = {
   orders: [],
   allorders: [],
