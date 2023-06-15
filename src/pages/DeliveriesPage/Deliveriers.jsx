@@ -57,7 +57,7 @@ const Deliveriers = () => {
               }}
             >
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-                {item.name} {item.surname}
+                {item.phoneNumber}
               </Typography>
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
                 $800

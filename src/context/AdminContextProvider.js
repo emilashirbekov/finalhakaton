@@ -8,7 +8,9 @@ const INIT_STATE = {
   deliveries: [],
   couriers: [],
   expectentions: 0,
+  totalPage: 0,
   user: "",
+  deliveries_true: [],
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
@@ -27,6 +29,9 @@ function reducer(state = INIT_STATE, action) {
     case "GET_COURIERS": {
       return { ...state, couriers: action.payload };
     }
+    case "GET_DELIVERIES_TRUE": {
+      return { ...state, deliveries_true: action.payload };
+    }
     default: {
       return state;
     }
@@ -36,18 +41,12 @@ function reducer(state = INIT_STATE, action) {
 const AdminContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
-  function getUser() {
-    try {
-      let res = JSON.parse(localStorage.getItem("token"));
-      dispatch({ type: "GET_USER", payload: res });
-    } catch (error) {}
-  }
-
   async function getCouriers() {
     try {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
       const count = res.data.filter((obj) => obj.adopted === "false").length;
+
       dispatch({
         type: "GET_EXPECTENTIONS",
         payload: count,
@@ -97,7 +96,9 @@ const AdminContextProvider = ({ children }) => {
     try {
       let res = await axios.get("http://localhost:7000/deliveriers");
       const filteredData = res.data.filter((obj) => obj.adopted === "false");
+      const trued = res.data.filter((obj) => obj.adopted === "true");
       dispatch({ type: "GET_DELIVERIES", payload: filteredData });
+      dispatch({ type: "GET_DELIVERIES_TRUE", payload: trued });
     } catch (error) {
       console.log(error);
     }

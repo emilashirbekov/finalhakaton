@@ -23,6 +23,7 @@ import { useAdmin } from "../../context/AdminContextProvider";
 import UnarchiveIcon from "@mui/icons-material/Unarchive";
 import GroupRemoveIcon from "@mui/icons-material/GroupRemove";
 import { useAuth } from "../../context/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 const pages = ["deliveries", "couriers", "chat"];
 const settings = ["Profile", "Logout"];
 
@@ -56,7 +57,7 @@ function AdminPage() {
   //     }, index * 500); // Задержка в полсекунды между каждой ссылкой
   //   });
   // }
-
+  const navigate = useNavigate();
   return (
     <div className="Wrapper">
       <div
@@ -90,7 +91,9 @@ function AdminPage() {
               sx={{ fontSize: "large" }}
             ></TransferWithinAStationIcon>
           </a>
-          <a class="animated-link">Admin chat</a>
+          <a class="animated-link" onClick={(e) => navigate("/")}>
+            Korzina
+          </a>
           <a class="animated-link">Profile</a>
           <a class="animated-link" onClick={() => logout()}>
             Logout{" "}

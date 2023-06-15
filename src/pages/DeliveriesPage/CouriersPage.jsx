@@ -45,15 +45,19 @@ const CouriersPage = () => {
   const [phoneNumber, setPhoneNumber] = useState();
   const [salary, setSalary] = useState();
   const [photoAuto, setPhotoAuto] = useState();
-  const [texPasport, settexPasport] = useState();
+  const [techPass, settexPasport] = useState();
   function handleChange(obj) {
     obj.salary = salary;
     obj.email = email;
     obj.phoneNumber = phoneNumber;
-    obj.texPasport = texPasport;
+    obj.techPass = techPass;
     obj.FLL = FLL;
     return obj;
   }
+  const [cours, setCours] = useState(couriers);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coursPage] = useState(10);
   return (
     <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
       <Box>
@@ -162,7 +166,7 @@ const CouriersPage = () => {
                   required
                   id="outlined-required"
                   label="texpasport"
-                  value={texPasport}
+                  value={techPass}
                   onChange={(e) => settexPasport(e.target.value)}
                 ></TextField>
                 <Button
@@ -271,7 +275,7 @@ const CouriersPage = () => {
                       setEmail(item.email);
                       setPhoneNumber(item.phoneNumber);
                       setSalary(item.salary);
-                      settexPasport(item.texPasport);
+                      settexPasport(item.techPass);
                     }}
                   >
                     Изменить курьера

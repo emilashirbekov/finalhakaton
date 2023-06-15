@@ -2,48 +2,42 @@
   "deliveriers": [
     {
       "id": 2,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "true"
     },
     {
       "id": 3,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "true"
     },
     {
       "id": 4,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "false"
     },
     {
       "id": 5,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "false"
     },
     {
       "id": 6,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "false"
     },
     {
       "id": 7,
-      "name": "Emka",
-      "surname": "Ashirbekov",
+      "phoneNumber": "Emka",
       "form": "Bishkek",
       "to": "osh",
       "adopted": "false"
@@ -58,7 +52,11 @@
       "email": "214",
       "salary": 9320,
       "FLL": "Emil Ashir",
-      "texPasport": "23456"
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     },
     {
       "id": 3,
@@ -68,7 +66,11 @@
       "salary": 300,
       "email": "214",
       "FLL": "Bayel",
-      "texPasport": "23456"
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     },
     {
       "id": 6,
@@ -78,7 +80,11 @@
       "salary": 5600,
       "email": "214",
       "FLL": "Emil Ashirbekov",
-      "texPasport": "23456"
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     },
     {
       "id": 7,
@@ -88,7 +94,11 @@
       "email": "214",
       "salary": 300,
       "FLL": "Bayel Ash",
-      "texPasport": "23456"
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     },
     {
       "id": 8,
@@ -98,7 +108,11 @@
       "salary": 300,
       "email": "214",
       "FLL": "Bayel Ash",
-      "texPasport": "23456"
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     }
   ]
 }
