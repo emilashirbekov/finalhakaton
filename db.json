@@ -10,7 +10,7 @@
       "date": "asmdkasmkda",
       "CVV": "asmdka",
       "weight": "100",
-      "adopted": "false",
+      "adopted": "accepted",
       "price": 1200,
       "id": 1
     },
@@ -38,7 +38,7 @@
       "date": "skadmsakda",
       "CVV": "sandjasdnaj",
       "weight": "askdasmkdas",
-      "adopted": "false",
+      "adopted": "accepted",
       "price": 0,
       "id": 4
     }
