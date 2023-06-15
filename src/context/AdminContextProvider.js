@@ -9,6 +9,7 @@ const INIT_STATE = {
   couriers: [],
   expectentions: 0,
   user: "",
+  deliveries_true: [],
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
@@ -26,6 +27,9 @@ function reducer(state = INIT_STATE, action) {
     }
     case "GET_COURIERS": {
       return { ...state, couriers: action.payload };
+    }
+    case "GET_DELIVERIES_TRUE": {
+      return { ...state, deliveries_true: action.payload };
     }
     default: {
       return state;
@@ -46,13 +50,13 @@ const AdminContextProvider = ({ children }) => {
     try {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
-      const count = state.couriers.filter(
-        (obj) => obj.adopted === "false"
-      ).length;
+      const count = res.data.filter((obj) => obj.adopted === "false").length;
+      const trued = res.data.filter((obj) => obj.adopted === "true");
       dispatch({
         type: "GET_EXPECTENTIONS",
         payload: count,
       });
+      dispatch({ type: "GET_DELIVERIES_TRUE", payload: trued });
     } catch (error) {
       console.log(error);
     }
@@ -63,6 +67,16 @@ const AdminContextProvider = ({ children }) => {
       getCouriers();
     } catch (error) {}
   }
+
+  async function addCouriers(newCourier) {
+    try {
+      await axios.post(`http://localhost:7000/couriers/`, newCourier);
+      getCouriers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async function changeAdopted(id, obj) {
     axios.patch(`http://localhost:7000/couriers/${id}`, obj);
     getCouriers();
@@ -87,19 +101,24 @@ const AdminContextProvider = ({ children }) => {
   async function getDeliveries() {
     try {
       let res = await axios.get("http://localhost:7000/deliveriers");
-      let d;
-      for (let i = 0; i < res.data; i++) {
-        if (res.data[i].adopted == "false") {
-          dispatch({ type: "GET_DELIVERIES", payload: res.data });
-        }
-      }
+      const filteredData = res.data.filter((obj) => obj.adopted === "false");
+      const trued = res.data.filter((obj) => obj.adopted === "true");
+      dispatch({ type: "GET_DELIVERIES", payload: filteredData });
+      dispatch({ type: "GET_DELIVERIES_TRUE", payload: trued });
     } catch (error) {
       console.log(error);
     }
   }
+
+  async function changeInWay(id, obj) {
+    axios.patch(`http://localhost:7000/couriers/${id}`, obj);
+    getDeliveries();
+  }
   let values = {
     getCouriers,
+    changeInWay,
     couriers: state.couriers,
+    addCouriers,
     deleteCouriers,
     changeAdopted,
     sortUbiv,
@@ -108,7 +127,9 @@ const AdminContextProvider = ({ children }) => {
     deliveries: state.deliveries,
     // expect,
     expectentions: state.expectentions,
+    deliveries_true: state.deliveries_true,
   };
+
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
   );
