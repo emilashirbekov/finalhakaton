@@ -38,9 +38,11 @@ export default function AddressFormPage() {
       date: "",
       CVV: "",
       weight: "",
+      adopted: "false",
     },
     validationSchema,
     onSubmit: async (values) => {
+      console.log(values);
       addOrder(values);
     },
   });
@@ -131,18 +133,18 @@ export default function AddressFormPage() {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="address_weight"
-            name="address_weight"
+            id="weight"
+            name="weight"
             label="Введите вес вашего товара"
             fullWidth
-            autoComplete="shipping address-line1"
+            autoComplete="shipping"
             variant="standard"
-            value={formik.values.address_weight}
+            value={formik.values.weight}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.errors.address_weight && formik.touched.address_weight && (
-            <div className="error-message">{formik.errors.address_weight}</div>
+          {formik.errors.weight && formik.touched.weight && (
+            <div className="error-message">{formik.errors.weight}</div>
           )}
         </Grid>
         <Grid item xs={12}>

@@ -21,12 +21,18 @@ const data = [
 ];
 
 const DeliveriesPage = () => {
-  const { getCouriers, couriers, changeAdopted, expectentions } = useAdmin();
+  const {
+    getCouriers,
+    couriers,
+    expectentions,
+    deliveries,
+    changeAdoptedDeli,
+  } = useAdmin();
 
   useEffect(() => {
     getCouriers();
   }, []);
-
+  console.log(expectentions, "2143");
   const renderLineChart = (
     <LineChart
       width={500}
@@ -52,7 +58,7 @@ const DeliveriesPage = () => {
             <AirportShuttleIcon fontSize="large"></AirportShuttleIcon>
           </IconButton>
           <span className="MainContain__Right__item__span">
-            Deliveries: {6}
+            Deliveries: {deliveries.length}
           </span>
         </div>
         <div className="MainContain__Right__item">

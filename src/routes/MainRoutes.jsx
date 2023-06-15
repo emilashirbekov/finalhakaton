@@ -8,6 +8,7 @@ import DeliverPage from "../pages/DeliverPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import OrdersPage from "../pages/OrdersPage/OrdersPage";
+import KorzinaPage from "../pages/KorzinaPage/KorzinaPage";
 
 const MainRoutes = () => {
   return (
@@ -23,6 +24,7 @@ const MainRoutes = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/deliver" element={<DeliverPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/korzina" element={<KorzinaPage />} />
       </Routes>
     </>
   );

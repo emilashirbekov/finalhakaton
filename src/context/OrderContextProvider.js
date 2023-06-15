@@ -59,7 +59,7 @@ const OrderContextProvider = ({ children }) => {
   const addOrder = async (newOrder) => {
     try {
       // const config = getAuth();
-      await axios.post(`http://localhost:7000/deliveriers`, newOrder);
+      await axios.post(`http://localhost:7000/deliveriers/`, newOrder);
     } catch (error) {
       console.log(error);
     }
