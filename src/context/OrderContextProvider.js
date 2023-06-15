@@ -1,6 +1,6 @@
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
-import { API_ORDERS } from "../helpers/const";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
+// import { API_ORDERS } from "../helpers/const";
 
 const orderContext = createContext();
 
@@ -22,31 +22,28 @@ const reducer = (state = INIT_STATE, action) => {
   }
 };
 
-const getAuth = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const Authorization = `Bearer ${token.access}`;
-  const config = {
-    header: {
-      Authorization,
-    },
-  };
-  return config;
-};
+// const getAuth = () => {
+//   const token = JSON.parse(localStorage.getItem("token"));
+//   const Authorization = `Bearer ${token.access}`;
+//   const config = {
+//     headers: {
+//       Authorization,
+//     },
+//   };
+//   return config;
+// };
 
 const OrderContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   const getOrders = async () => {
     try {
-      const config = getAuth();
+      // const config = getAuth();
       const res = await axios(
-        `${API_ORDERS}/${window.location.search}`,
-        config
+        `http://localhost:7000/deliveriers/${window.location.search}`
       );
-      dispatch({
-        type: "GET_ORDERS",
-        payload: res.data.results,
-      });
+      const trued = res.data.filter((obj) => obj.adopted === "true");
+      dispatch({ type: "GET_ORDERS", payload: trued });
       dispatch({
         type: "GET_TOTAL_PAGE",
         payload: Math.ceil(res.data.count / 6),
@@ -55,11 +52,14 @@ const OrderContextProvider = ({ children }) => {
       console.log(error);
     }
   };
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   const addOrder = async (newOrder) => {
     try {
-      const config = getAuth();
-      const res = await axios.post(`${API_ORDERS}/orders/`, newOrder, config);
+      // const config = getAuth();
+      await axios.post(`http://localhost:7000/deliveriers`, newOrder);
     } catch (error) {
       console.log(error);
     }

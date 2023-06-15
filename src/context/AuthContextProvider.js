@@ -80,7 +80,10 @@ const AuthContextProvider = ({ children }) => {
       let res = await axios.post(`http://34.16.134.60/api/v1/refresh/`, {
         refresh: token.refresh,
       });
-      localStorage.setItem("token", JSON.stringify(res.data));
+      localStorage.setItem(
+        "token",
+        JSON.stringify({ refresh: token.refresh, access: res.data.access })
+      );
     } catch (error) {
       console.log(error);
     }

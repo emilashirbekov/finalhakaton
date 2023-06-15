@@ -1,32 +1,18 @@
 import React, { useEffect, useState } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import AddressForm from "./AddressFormPage";
-import PaymentForm from "./Payment";
-import Review from "./Review";
 import { Paper } from "@mui/material";
 import "./Form.css";
 import { Link } from "react-router-dom";
-import { useOrder } from "../../context/OrderContextProvider";
 
 function Checkout() {
   const [activeStep, setActiveStep] = React.useState(0);
-  const { addOrder } = useOrder();
-
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
-
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -38,21 +24,9 @@ function Checkout() {
     }
   }, []);
 
-  const [formData, setFormData] = useState({
-    address: {
-      phone_sender: "",
-      address_sender: "",
-      address_receiver: "",
-      description: "",
-    },
-    payment: {
-      cardName: "",
-      cardNumber: "",
-      date: "",
-      cvv: "",
-    },
-  });
-
+  function info(obj) {
+    return obj;
+  }
   return (
     <>
       {isLoggedIn && (
@@ -77,12 +51,6 @@ function Checkout() {
                 <Step>
                   <StepLabel>Адрес доставки</StepLabel>
                 </Step>
-                <Step>
-                  <StepLabel>Оплата</StepLabel>
-                </Step>
-                <Step>
-                  <StepLabel>Просмотр заказа</StepLabel>
-                </Step>
               </Stepper>
               {activeStep === 3 ? (
                 <React.Fragment>
@@ -98,27 +66,6 @@ function Checkout() {
               ) : (
                 <React.Fragment>
                   {activeStep === 0 && <AddressForm />}
-                  {activeStep === 1 && <PaymentForm />}
-                  {activeStep === 2 && <Review />}
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    {activeStep !== 0 && (
-                      <Button
-                        type="submit"
-                        onClick={handleBack}
-                        sx={{ mt: 3, ml: 1 }}
-                      >
-                        Назад
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      type="submit"
-                      onClick={handleNext}
-                      sx={{ mt: 3, ml: 1 }}
-                    >
-                      {activeStep === 2 ? "Заказать" : "Далее"}
-                    </Button>
-                  </Box>
                 </React.Fragment>
               )}
             </Paper>
