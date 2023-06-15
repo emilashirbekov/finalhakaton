@@ -9,7 +9,7 @@ import { useOrder } from "../../../context/OrderContextProvider";
 
 const CourierPage = () => {
   const { getDeliveries, deliveries_true, changeInWay } = useAdmin();
-  const { pageTotalCount, orders, getOrders } = useOrder();
+  const { pageTotalCount, allorders, getOrders } = useOrder();
   const [searchParams, setSearchParams] = useSearchParams();
   const [page, setPage] = useState(1);
 
@@ -34,7 +34,7 @@ const CourierPage = () => {
   return (
     <div>
       <CourierNavbar />
-      {orders.map((item) => (
+      {allorders.map((item) => (
         <CourierCard item={item} key={item.id} />
       ))}
 
