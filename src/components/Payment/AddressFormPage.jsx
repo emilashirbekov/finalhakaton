@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -39,39 +39,31 @@ export default function AddressFormPage() {
       CVV: "",
       weight: "",
       adopted: "false",
+      price: 0,
     },
     validationSchema,
     onSubmit: async (values) => {
-      console.log(values);
       addOrder(values);
     },
   });
 
   const [price, setPrice] = useState(0);
 
-  function calculateSum(weight) {
-    let price;
-
-    switch (true) {
-      case weight < 10:
-        price = 100;
-        break;
-      case weight >= 10 && weight < 50:
-        price = 500;
-        break;
-      case weight >= 50 && weight < 100:
-        price = 800;
-        break;
-      case weight >= 100 && weight < 200:
-        price = 1000;
-        break;
-      default:
-        price = 50;
-        break;
+  useEffect(() => {
+    const weight = parseFloat(formik.values.weight);
+    let price = 0;
+    if (weight < 10) {
+      price = 100;
+    } else if (weight >= 10 && weight < 50) {
+      price = 500;
+    } else if (weight >= 50 && weight < 100) {
+      price = 800;
+    } else if (weight >= 100 && weight < 200) {
+      price = 1000;
     }
-
-    return price;
-  }
+    setPrice(price + 200);
+    formik.setFieldValue("price", price);
+  }, [formik.values.weight]);
 
   return (
     <React.Fragment>
@@ -238,8 +230,19 @@ export default function AddressFormPage() {
             <div className="error-message">{formik.errors.CVV}</div>
           )}
         </Grid>
-        <Typography variant="h2" sx={{ marginLeft: "3rem" }}>
-          Сумма: {price}
+        <Typography
+          onChange={formik.handleChange}
+          variant="h2"
+          sx={{ marginLeft: "3rem", marginTop: "3rem" }}
+        >
+          Сумма: {price} сом
+        </Typography>
+        <Typography
+          onChange={formik.handleChange}
+          variant="h2"
+          sx={{ marginLeft: "3rem", marginTop: "3rem" }}
+        >
+          Итоговая сумма зависит от веса вашего товара и суммы доставки
         </Typography>
         <Grid item xs={12} sx={{ display: "flex" }}>
           <FormControlLabel
