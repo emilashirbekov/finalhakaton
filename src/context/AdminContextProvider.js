@@ -8,8 +8,9 @@ const INIT_STATE = {
   deliveries: [],
   couriers: [],
   expectentions: 0,
-  totalPage: 0,
+  pageTotalCount: 1,
   likes: 0,
+  adopted: false,
   user: "",
   deliveries_true: [],
 };
@@ -33,6 +34,8 @@ function reducer(state = INIT_STATE, action) {
     case "INCREMENT_LIKES": {
       return { ...state, likes: action.payload };
     }
+    case "PAGE_TOTAL_COUNT":
+      return { ...state, pageTotalCount: action.payload };
     default: {
       return state;
     }
@@ -122,7 +125,7 @@ const AdminContextProvider = ({ children }) => {
   }
   async function addCouriers(newCourier) {
     try {
-      await axios.post(`http://localhost:7000/deliveriers/`, newCourier);
+      await axios.post(`http://localhost:7000/couriers/`, newCourier);
       getDeliveries();
     } catch (error) {
       console.log(error);
@@ -143,6 +146,7 @@ const AdminContextProvider = ({ children }) => {
     // expect,
     expectentions: state.expectentions,
     changeCouriers,
+    pageTotalCount: state.pageTotalCount,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
