@@ -10,11 +10,10 @@
       "date": "asmdkasmkda",
       "CVV": "asmdka",
       "weight": "100",
-      "adopted": "false",
+      "adopted": "accepted",
       "price": 1200,
       "id": 1
     },
-
     {
       "phone_sender": "Эмиль",
       "address_sender": "Ашырбеков",
@@ -28,6 +27,20 @@
       "adopted": "false",
       "price": 1000,
       "id": 3
+    },
+    {
+      "phone_sender": "Эмиль",
+      "address_sender": "Ашырбеков",
+      "address_receiver": "Панфилова 8",
+      "description": "ыфвтыфывто",
+      "cardName": "фыьвфылвф",
+      "cardNumber": "фывьфылвф",
+      "date": "ыьфвлфывф",
+      "CVV": "отфывофывтф",
+      "weight": "120",
+      "adopted": "accepted",
+      "price": 1000,
+      "id": 4
     }
   ],
   "couriers": [
@@ -41,7 +54,7 @@
       "FLL": "Emil Ashir",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
     },
@@ -55,7 +68,7 @@
       "FLL": "Bayel",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
     },
@@ -69,70 +82,9 @@
       "FLL": "Emil Ashirbekov",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
-    },
-    {
-      "id": 7,
-      "phoneNumber": "+996 999 999 999",
-      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
-      "email": "214",
-      "salary": 300,
-      "FLL": "Bayel Ash",
-      "techPass": "23456",
-      "pass": "asasa",
-      "likes": 10,
-      "rating": 0,
-      "userPhoto": ""
-    },
-    {
-      "id": 8,
-      "phoneNumber": "+996 999 999 999",
-      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
-      "salary": 300,
-      "email": "214",
-      "FLL": "Bayel Ash",
-      "techPass": "23456",
-      "pass": "asasa",
-      "likes": 10,
-      "rating": 0,
-      "userPhoto": ""
-    }
-  ],
-  "orders": [
-    {
-      "id": 1,
-      "phone_sender": "This field is required.",
-      "phone_receiver": "This field is required.",
-      "address_sender": "This field is required.",
-      "address_receiver": "This field is required."
-    },
-    {
-      "id": 2,
-      "phone_sender": "This field is required.",
-      "phone_receiver": "This field is required.",
-      "address_sender": "This field is required.",
-      "address_receiver": "This field is required."
-    },
-    {
-      "id": 3,
-      "phone_sender": "This field is required.",
-      "phone_receiver": "This field is required.",
-      "address_sender": "This field is required.",
-      "address_receiver": "This field is required."
-    },
-    {
-      "id": 4,
-      "phone_sender": "This field is required.",
-      "phone_receiver": "This field is required.",
-      "address_sender": "This field is required.",
-      "address_receiver": "This field is required."
-    },
-    {
-      "id": 5
     }
   ]
 }

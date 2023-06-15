@@ -8,7 +8,7 @@ export const useOrder = () => useContext(orderContext);
 const LIMIT = 5;
 const INIT_STATE = {
   orders: [],
-  pageTotalCount: 1,
+  allorders: [],
 };
 const API = "http://localhost:7000/deliveriers";
 const reducer = (state = INIT_STATE, action) => {
@@ -18,8 +18,11 @@ const reducer = (state = INIT_STATE, action) => {
         ...state,
         orders: action.payload,
       };
-    case "GET_PAGE":
-      return { ...state, pageTotalCount: action.payload };
+    case "GET_ALLORDERS":
+      return {
+        ...state,
+        allorders: action.payload,
+      };
     default:
       return state;
   }
@@ -48,19 +51,16 @@ const OrderContextProvider = ({ children }) => {
       const totalPages = Math.ceil(res.headers["x-total-count"] / LIMIT);
       const trued = res.data.filter((obj) => obj.adopted === "true");
 
-      console.log(res.headers);
       dispatch({ type: "GET_ORDERS", payload: trued });
       dispatch({
         type: "GET_PAGE",
         payload: totalPages,
       });
+      dispatch({ type: "GET_ALLORDERS", payload: res.data });
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getOrders();
-  }, []);
 
   const addOrder = async (newOrder) => {
     try {
@@ -70,14 +70,22 @@ const OrderContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-
+  async function changeAdoptedDeli(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/deliveriers/${id}`, obj);
+      getOrders();
+    } catch (error) {
+      console.log(error);
+    }
+  }
   const values = {
     orders: state.orders,
     getOrders,
     addOrder,
-    pageTotalCount: state.pageTotalCount,
+    allorders: state.allorders,
+    changeAdoptedDeli,
   };
-  console.log(values.pageTotalCount);
+
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>
   );
