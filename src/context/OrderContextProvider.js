@@ -8,6 +8,7 @@ export const useOrder = () => useContext(orderContext);
 
 const INIT_STATE = {
   orders: [],
+  allorders: [],
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -16,6 +17,11 @@ const reducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         orders: action.payload,
+      };
+    case "GET_ALLORDERS":
+      return {
+        ...state,
+        allorders: action.payload,
       };
     default:
       return state;
@@ -48,13 +54,11 @@ const OrderContextProvider = ({ children }) => {
         type: "GET_TOTAL_PAGE",
         payload: Math.ceil(res.data.count / 6),
       });
+      dispatch({ type: "GET_ALLORDERS", payload: res.data });
     } catch (error) {
       console.log(error);
     }
   };
-  useEffect(() => {
-    getOrders();
-  }, []);
 
   const addOrder = async (newOrder) => {
     try {
@@ -69,6 +73,7 @@ const OrderContextProvider = ({ children }) => {
     orders: state.orders,
     getOrders,
     addOrder,
+    allorders: state.allorders,
   };
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>

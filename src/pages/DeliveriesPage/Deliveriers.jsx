@@ -43,7 +43,7 @@ const Deliveriers = () => {
               }}
             >
               <Typography variant="subtitle1" sx={{ marginBottom: "10px" }}>
-                Кто заказал:
+                номер кто заказал:
               </Typography>
               <Typography variant="subtitle1" sx={{ marginBottom: "10px" }}>
                 Сумма заказа:
@@ -57,7 +57,7 @@ const Deliveriers = () => {
               }}
             >
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-                {item.phoneNumber}
+                {item.phone_sender}
               </Typography>
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
                 $800
@@ -72,7 +72,7 @@ const Deliveriers = () => {
               }}
             >
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-                От: {item.form}
+                От: {item.address_sender}
               </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <ArrowForwardIosIcon />
@@ -86,7 +86,7 @@ const Deliveriers = () => {
                 <ArrowForwardIosIcon />
               </Box>
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-                В: {item.to}
+                В: {item.address_receiver}
               </Typography>
             </Box>
             <Box sx={{ marginRight: "2.5%" }}>
