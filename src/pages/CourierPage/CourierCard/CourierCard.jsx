@@ -6,17 +6,11 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import "./CourierCard.css";
 import { Box, width } from "@mui/system";
-import { useAdmin } from "../../../context/AdminContextProvider";
 import { useOrder } from "../../../context/OrderContextProvider";
 
 export default function CourierCard({ item, number }) {
   const [isFlyAway, setFlyAway] = React.useState(false);
-  const { changeAdoptedDeli, getOrders } = useOrder();
-
-  React.useEffect(() => {
-    getOrders();
-  }, []);
-
+  const { changeAdoptedDeli } = useOrder();
   const handleFlyAway = () => {
     setFlyAway(true);
   };

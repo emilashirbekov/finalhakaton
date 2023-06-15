@@ -35,6 +35,9 @@ function reducer(state = INIT_STATE, action) {
     case "INCREMENT_LIKES": {
       return { ...state, likes: action.payload };
     }
+    case "GET_COURIERSTRUE": {
+      return { ...state, couriersTrue: action.payload };
+    }
     case "PAGE_TOTAL_COUNT":
       return { ...state, pageTotalCount: action.payload };
     default: {
@@ -135,6 +138,29 @@ const AdminContextProvider = ({ children }) => {
       console.log(error);
     }
   }
+
+  async function incrementLikes(id) {
+    try {
+      const updatedCouriers = state.couriers.map((courier) => {
+        if (courier.id === id) {
+          return {
+            ...courier,
+            likes: courier.likes + 1,
+          };
+        }
+        return courier;
+      });
+
+      await axios.patch(`http://localhost:7000/couriers/${id}`, {
+        likes: updatedCouriers.find((courier) => courier.id === id).likes,
+      });
+
+      dispatch({ type: "INCREMENT_LIKES", payload: updatedCouriers });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
   let values = {
     getCouriers,
     couriers: state.couriers,
@@ -152,6 +178,7 @@ const AdminContextProvider = ({ children }) => {
     changeCouriers,
     couriersTrue: state.couriersTrue,
     pageTotalCount: state.pageTotalCount,
+    incrementLikes,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
