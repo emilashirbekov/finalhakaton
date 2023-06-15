@@ -7,7 +7,7 @@ import { Button, CardActionArea, CardActions } from "@mui/material";
 import "./CourierCard.css";
 import { Box, width } from "@mui/system";
 
-export default function CourierCard() {
+export default function CourierCard({ item, number }) {
   const [isFlyAway, setFlyAway] = React.useState(false);
 
   const handleFlyAway = () => {
@@ -32,29 +32,32 @@ export default function CourierCard() {
               variant="h4"
               component="div"
             >
-              Order Nº1
+              Order Nº{number}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="div"
+              sx={{ fontSize: "14px", textAlign: "center" }}
+              color="text.secondary"
+            >
+              Description:{item.description}
             </Typography>
             <Box className="info" sx={{ display: "flex" }}>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  PhoneNumber:777777777
+                  Phone Sender: {item.phone_sender}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Weight:777
-                </Typography>
-                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Name:Lucifer
+                  Phone Reciver:{item.phone_receiver}
                 </Typography>
               </Box>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Price:999
+                  Adress Sender:{item.address_sender}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Address:logvinenko 99
-                </Typography>
-                <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  From: Restoran Grand hall
+                  Address Reciver:{item.address_receiver}
                 </Typography>
               </Box>
             </Box>

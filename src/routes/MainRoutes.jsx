@@ -21,15 +21,15 @@ const MainRoutes = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/user" element={<ProfilePage />} />
-          <Route path="/courier_history" element={<HistoryPage />} />
-          <Route path="/courier" element={<CourierPage />} />
-          <Route path="/courier_profile" element={<CourierProfile />} />
-          <Route path="/user" element={<ProfilePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/deliver" element={<DeliverPage />} />
-          <Route path="/admin" element={<AdminPage />} />
         </Route>
+        <Route path="/courier" element={<CourierPage />} />{" "}
+        <Route path="/courier_history" element={<HistoryPage />} />
+        <Route path="/courier_profile" element={<CourierProfile />} />
+        <Route path="/user" element={<ProfilePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/deliver" element={<DeliverPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </>
   );

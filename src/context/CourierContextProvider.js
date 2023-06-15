@@ -1,5 +1,5 @@
 import axios from "axios";
-import { async } from "q";
+
 import React, { createContext, useContext, useReducer } from "react";
 import { API_ORDERS } from "../helpers/const";
 
@@ -38,17 +38,11 @@ const CourierContextProvider = ({ children }) => {
       console.log(error);
     }
   };
-  const GET_ORDER = async () => {
-    try {
-      let res = await axios.get(API_ORDERS);
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const values = {};
 
-  GET_ORDER();
-  return <courierContext.Provider>{children}</courierContext.Provider>;
+  return (
+    <courierContext.Provider value={values}>{children}</courierContext.Provider>
+  );
 };
 
 export default CourierContextProvider;

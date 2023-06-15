@@ -35,5 +35,36 @@
       "FLL": "Emil Ashirbekov"
     }
   ],
-  "payment_details": [{}]
+  "payment_details": [{}],
+
+  "orders": [
+    {
+      "id": 1,
+      "phone_sender": "This field is required.",
+      "phone_receiver": "This field is required.",
+      "address_sender": "This field is required.",
+      "address_receiver": "This field is required."
+    },
+    {
+      "id": 2,
+      "phone_sender": "This field is required.",
+      "phone_receiver": "This field is required.",
+      "address_sender": "This field is required.",
+      "address_receiver": "This field is required."
+    },
+    {
+      "id": 3,
+      "phone_sender": "This field is required.",
+      "phone_receiver": "This field is required.",
+      "address_sender": "This field is required.",
+      "address_receiver": "This field is required."
+    },
+    {
+      "id": 4,
+      "phone_sender": "This field is required.",
+      "phone_receiver": "This field is required.",
+      "address_sender": "This field is required.",
+      "address_receiver": "This field is required."
+    }
+  ]
 }

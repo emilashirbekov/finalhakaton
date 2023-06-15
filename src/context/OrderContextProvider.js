@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { API_ORDERS } from "../helpers/const";
 
 const orderContext = createContext();
@@ -9,7 +9,7 @@ export const useOrder = () => useContext(orderContext);
 const INIT_STATE = {
   orders: [],
 };
-
+const LIMIT = 4;
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_ORDERS":
@@ -17,6 +17,8 @@ const reducer = (state = INIT_STATE, action) => {
         ...state,
         orders: action.payload,
       };
+    case "GET_PAGE":
+      return { ...state, pageTotalCount: action.payload };
     default:
       return state;
   }
@@ -26,7 +28,7 @@ const getAuth = () => {
   const token = JSON.parse(localStorage.getItem("token"));
   const Authorization = `Bearer ${token.access}`;
   const config = {
-    header: {
+    headers: {
       Authorization,
     },
   };
@@ -39,14 +41,17 @@ const OrderContextProvider = ({ children }) => {
   const getOrders = async () => {
     try {
       const config = getAuth();
-      const res = await axios(
+      const res = await axios.get(
         `${API_ORDERS}/${window.location.search}`,
         config
       );
+
+      console.log(res);
       dispatch({
         type: "GET_ORDERS",
         payload: res.data.results,
       });
+
       dispatch({
         type: "GET_TOTAL_PAGE",
         payload: Math.ceil(res.data.count / 6),
@@ -70,6 +75,7 @@ const OrderContextProvider = ({ children }) => {
     getOrders,
     addOrder,
   };
+
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>
   );
