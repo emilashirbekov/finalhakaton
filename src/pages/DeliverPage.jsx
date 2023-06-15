@@ -147,11 +147,9 @@ const DeliverPage = () => {
                   <label htmlFor="photo">Фото транспорта</label>
                   <input
                     id="photo"
-                    type="file"
+                    type="text"
                     name="photo"
-                    onChange={(e) => {
-                      formik.setFieldValue("photo", e.target.files[0]);
-                    }}
+                    onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
                   {formik.errors.photo && formik.touched.photo && (
@@ -162,11 +160,9 @@ const DeliverPage = () => {
                   <label htmlFor="userPhoto">Ваше фото</label>
                   <input
                     id="userPhoto"
-                    type="file"
+                    type="text"
                     name="userPhoto"
-                    onChange={(e) => {
-                      formik.setFieldValue("userPhoto", e.target.files[0]);
-                    }}
+                    onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
                   {formik.errors.userPhoto && formik.touched.userPhoto && (

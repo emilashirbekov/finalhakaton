@@ -10,12 +10,20 @@ import PersonIcon from "@mui/icons-material/Person";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useAuth } from "../../context/AuthContextProvider";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { useOrder } from "../../context/OrderContextProvider";
 
 const Navbar = () => {
   const [Mobile, setMobile] = useState(false);
   const [open, setIsOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { allorders, getOrders } = useOrder();
+
+  useEffect(() => {
+    getOrders();
+  }, []);
+
   const { users, logout } = useAuth();
+
   useEffect(() => {
     if (localStorage.getItem("token")) {
       setIsLoggedIn(true);
@@ -95,7 +103,11 @@ const Navbar = () => {
                       sx={{ padding: 0, margin: 0 }}
                       aria-label="show 17 new notifications"
                     >
-                      <Badge badgeContent={0} component={Link} to="/bag">
+                      <Badge
+                        badgeContent={allorders.length}
+                        component={Link}
+                        to="/bag"
+                      >
                         <ShoppingBagIcon
                           sx={{ color: "#fff" }}
                           fontSize="large"

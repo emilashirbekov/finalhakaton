@@ -10,6 +10,7 @@ const INIT_STATE = {
   couriers: [],
   expectentions: 0,
   totalPage: 0,
+  likes: 0,
   user: "",
   deliveries_true: [],
 };
@@ -32,7 +33,7 @@ function reducer(state = INIT_STATE, action) {
       return { ...state, couriers: action.payload };
     }
     case "INCREMENT_LIKES": {
-      return { ...state, couriers: action.payload };
+      return { ...state, likes: action.payload };
     }
     case "INCREMENT_RATING": {
       return { ...state, couriers: action.payload };
