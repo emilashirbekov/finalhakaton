@@ -16,7 +16,6 @@ import { Link } from "react-router-dom";
 
 const pages = [
   { title: "Orders", link: "/courier" },
-  { title: "History", link: "/courier_history" },
   { title: "Home", link: "/" },
 ];
 const settings = [{ title: "Profile", link: "/courier_profile" }];

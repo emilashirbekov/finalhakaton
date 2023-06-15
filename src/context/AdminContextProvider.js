@@ -1,6 +1,6 @@
-import { LocalLaundryService } from "@mui/icons-material";
+import { AspectRatio, LocalLaundryService } from "@mui/icons-material";
 import axios from "axios";
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 const adminContext = createContext();
 export const useAdmin = () => useContext(adminContext);
 const INIT_STATE = {
@@ -8,7 +8,9 @@ const INIT_STATE = {
   deliveries: [],
   couriers: [],
   expectentions: 0,
+  totalPage: 0,
   user: "",
+  deliveries_true: [],
 };
 function reducer(state = INIT_STATE, action) {
   switch (action.type) {
@@ -27,6 +29,9 @@ function reducer(state = INIT_STATE, action) {
     case "GET_COURIERS": {
       return { ...state, couriers: action.payload };
     }
+    case "GET_DELIVERIES_TRUE": {
+      return { ...state, deliveries_true: action.payload };
+    }
     default: {
       return state;
     }
@@ -35,20 +40,13 @@ function reducer(state = INIT_STATE, action) {
 
 const AdminContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
-  function getUser() {
-    try {
-      let res = JSON.parse(localStorage.getItem("token"));
-      dispatch({ type: "GET_USER", payload: res });
-    } catch (error) {}
-  }
 
   async function getCouriers() {
     try {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
-      const count = state.couriers.filter(
-        (obj) => obj.adopted === "false"
-      ).length;
+      const count = res.data.filter((obj) => obj.adopted === "false").length;
+
       dispatch({
         type: "GET_EXPECTENTIONS",
         payload: count,
@@ -84,15 +82,39 @@ const AdminContextProvider = ({ children }) => {
       console.log(error, "sortubiv");
     }
   }
+  async function changeCouriers(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/couriers/${id}`, obj);
+      getCouriers();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  // deliveries
   async function getDeliveries() {
     try {
       let res = await axios.get("http://localhost:7000/deliveriers");
-      let d;
-      for (let i = 0; i < res.data; i++) {
-        if (res.data[i].adopted == "false") {
-          dispatch({ type: "GET_DELIVERIES", payload: res.data });
-        }
-      }
+      const filteredData = res.data.filter((obj) => obj.adopted === "false");
+      const trued = res.data.filter((obj) => obj.adopted === "true");
+      dispatch({ type: "GET_DELIVERIES", payload: filteredData });
+      dispatch({ type: "GET_DELIVERIES_TRUE", payload: trued });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function changeAdoptedDeli(id, obj) {
+    try {
+      axios.patch(`http://localhost:7000/deliveriers/${id}`, obj);
+      getDeliveries();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deleteDeliveriers(id) {
+    try {
+      await axios.delete(`http://localhost:7000/deliveriers/${id}`);
+      getDeliveries();
     } catch (error) {
       console.log(error);
     }
@@ -105,9 +127,12 @@ const AdminContextProvider = ({ children }) => {
     sortUbiv,
     sortUVozr,
     getDeliveries,
+    changeAdoptedDeli,
     deliveries: state.deliveries,
+    deleteDeliveriers,
     // expect,
     expectentions: state.expectentions,
+    changeCouriers,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>

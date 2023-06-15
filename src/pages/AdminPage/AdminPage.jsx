@@ -11,18 +11,24 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import AdbIcon from "@mui/icons-material/Adb";
-import { Link } from "react-router-dom";
+import TransferWithinAStationIcon from "@mui/icons-material/TransferWithinAStation";
 import "./AdminPage.css";
-import { Translate } from "@mui/icons-material";
+
 import DeliveriesPage from "../DeliveriesPage/DeliveriesPage";
 import Deliveriers from "../DeliveriesPage/Deliveriers";
 import CouriersPage from "../DeliveriesPage/CouriersPage";
-
+import AppsIcon from "@mui/icons-material/Apps";
+import CallReceivedIcon from "@mui/icons-material/CallReceived";
+import { useAdmin } from "../../context/AdminContextProvider";
+import UnarchiveIcon from "@mui/icons-material/Unarchive";
+import GroupRemoveIcon from "@mui/icons-material/GroupRemove";
+import { useAuth } from "../../context/AuthContextProvider";
+import { useNavigate } from "react-router-dom";
 const pages = ["deliveries", "couriers", "chat"];
 const settings = ["Profile", "Logout"];
 
 function AdminPage() {
+  const { logout } = useAuth();
   const [pageState, setStatePage] = React.useState(1);
   const [menu, setMenu] = React.useState(false);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -51,7 +57,7 @@ function AdminPage() {
   //     }, index * 500); // Задержка в полсекунды между каждой ссылкой
   //   });
   // }
-
+  const navigate = useNavigate();
   return (
     <div className="Wrapper">
       <div
@@ -71,6 +77,7 @@ function AdminPage() {
             class="animated-link"
           >
             Deliveries
+            <UnarchiveIcon sx={{ fontSize: "large" }}></UnarchiveIcon>
           </a>
           <a
             onClick={() => {
@@ -79,14 +86,23 @@ function AdminPage() {
             }}
             class="animated-link"
           >
-            Couriers
+            Couriers{" "}
+            <TransferWithinAStationIcon
+              sx={{ fontSize: "large" }}
+            ></TransferWithinAStationIcon>
           </a>
-          <a class="animated-link">Admin chat</a>
+          <a class="animated-link" onClick={(e) => navigate("/korzina")}>
+            Korzina
+          </a>
           <a class="animated-link">Profile</a>
-          <a class="animated-link">Logout</a>
+          <a class="animated-link" onClick={() => logout()}>
+            Logout{" "}
+            <GroupRemoveIcon sx={{ fontSize: "large" }}></GroupRemoveIcon>
+          </a>
 
           <a class="animated-link" href="/">
-            Home page
+            Home page{" "}
+            <CallReceivedIcon sx={{ fontSize: "large" }}></CallReceivedIcon>
           </a>
         </nav>
       </div>
@@ -123,7 +139,7 @@ function AdminPage() {
                   setMenu(!menu);
                 }}
               >
-                <MenuIcon fontSize="large"></MenuIcon>
+                <AppsIcon fontSize="large"></AppsIcon>
               </IconButton>
               <Typography
                 variant="h6"

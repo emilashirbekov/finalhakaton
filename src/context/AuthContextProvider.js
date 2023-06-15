@@ -9,6 +9,7 @@ import { API_LOGIN, API_REGISTER } from "../helpers/const";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import { Try } from "@mui/icons-material";
 
 //Создаем контект
 const authContext = createContext();
@@ -80,7 +81,10 @@ const AuthContextProvider = ({ children }) => {
       let res = await axios.post(`http://34.16.134.60/api/v1/refresh/`, {
         refresh: token.refresh,
       });
-      localStorage.setItem("token", JSON.stringify(res.data));
+      localStorage.setItem(
+        "token",
+        JSON.stringify({ refresh: token.refresh, access: res.data.access })
+      );
     } catch (error) {
       console.log(error);
     }
@@ -95,8 +99,10 @@ const AuthContextProvider = ({ children }) => {
   }, []);
 
   function logout() {
-    localStorage.removeItem("token");
-    window.location.href = "/";
+    try {
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    } catch (error) {}
   }
 
   let values = {

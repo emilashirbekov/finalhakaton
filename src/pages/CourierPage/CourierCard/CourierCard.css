@@ -47,7 +47,7 @@
 }
 .content.fly-away {
   transition: 1s;
-  transform: translateY(-100%);
+  transform: translateY(-1000%);
 }
 
 @media all and (min-width: 320px) {

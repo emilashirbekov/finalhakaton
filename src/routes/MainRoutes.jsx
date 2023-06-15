@@ -8,10 +8,10 @@ import DeliverPage from "../pages/DeliverPage";
 import AdminPage from "../pages/AdminPage/AdminPage";
 import CourierPage from "../pages/CourierPage/CourierList/CourierPage";
 import CourierProfile from "../pages/CourierPage/CourierProfile/CourierProfile";
-import CourierHistory from "../pages/CourierPage/CourierHistory/CourierHistory";
-import HistoryPage from "../pages/CourierPage/CourierHistory/HistoryPage";
+
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import OrdersPage from "../pages/OrdersPage/OrdersPage";
+import KorzinaPage from "../pages/KorzinaPage/KorzinaPage";
 
 const MainRoutes = () => {
   return (
@@ -21,15 +21,16 @@ const MainRoutes = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/user" element={<ProfilePage />} />
-          <Route path="/courier_history" element={<HistoryPage />} />
-          <Route path="/courier" element={<CourierPage />} />
-          <Route path="/courier_profile" element={<CourierProfile />} />
-          <Route path="/user" element={<ProfilePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/deliver" element={<DeliverPage />} />
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
         </Route>
+        <Route path="/courier" element={<CourierPage />} />{" "}
+        <Route path="/courier_profile" element={<CourierProfile />} />
+        <Route path="/user" element={<ProfilePage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/deliver" element={<DeliverPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+        <Route path="/korzina" element={<KorzinaPage />} />
       </Routes>
     </>
   );

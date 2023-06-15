@@ -6,13 +6,21 @@ import Typography from "@mui/material/Typography";
 import { Button, CardActionArea, CardActions } from "@mui/material";
 import "./CourierCard.css";
 import { Box, width } from "@mui/system";
+import { useAdmin } from "../../../context/AdminContextProvider";
+import { useOrder } from "../../../context/OrderContextProvider";
 
-export default function CourierCard() {
+export default function CourierCard({ item, number }) {
   const [isFlyAway, setFlyAway] = React.useState(false);
-
+  const { changeAdoptedDeli } = useOrder();
   const handleFlyAway = () => {
     setFlyAway(true);
   };
+  const [state, setState] = React.useState(item);
+  function handlechange(obj) {
+    obj.adopted = "accepted";
+    return obj;
+  }
+  // console.log(item);
   return (
     <div className="container">
       <Card
@@ -32,29 +40,38 @@ export default function CourierCard() {
               variant="h4"
               component="div"
             >
-              Order Nº1
+              Order Nº{item.id}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h4"
+              component="div"
+              sx={{ fontSize: "14px", textAlign: "center" }}
+              color="text.secondary"
+            >
+              Description:{item.description}
             </Typography>
             <Box className="info" sx={{ display: "flex" }}>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  PhoneNumber:777777777
+                  Phone Sender:{item.phone_sender}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Weight:777
+                  CVV:{item.CVV}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Name:Lucifer
+                  Date:{item.date}
                 </Typography>
               </Box>
               <Box sx={{ margin: "0 10px" }}>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Price:999
+                  Adress Sender:{item.address_sender}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  Address:logvinenko 99
+                  Price:{item.price}
                 </Typography>
                 <Typography sx={{ fontSize: "14px" }} color="text.secondary">
-                  From: Restoran Grand hall
+                  Weight :{item.weight}
                 </Typography>
               </Box>
             </Box>
@@ -70,7 +87,8 @@ export default function CourierCard() {
               color: "white",
               fontSize: "14px",
             }}
-            onClick={() => {
+            onClick={(e) => {
+              changeAdoptedDeli(item.id, handlechange(item));
               handleFlyAway();
             }}
           >

@@ -4,6 +4,7 @@ import Partners from "../../components/Partners/Partners";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import About from "../../components/About/About";
 import Checkout from "../../components/Payment/CheckOut";
+import Couriers from "../../components/Couriers/Couriers";
 
 const HomePage = () => {
   return (
@@ -12,6 +13,7 @@ const HomePage = () => {
       <Partners />
       <HowItWorks />
       <About />
+      <Couriers />
       <Checkout />
     </>
   );
