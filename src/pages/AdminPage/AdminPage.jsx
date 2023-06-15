@@ -91,7 +91,7 @@ function AdminPage() {
               sx={{ fontSize: "large" }}
             ></TransferWithinAStationIcon>
           </a>
-          <a class="animated-link" onClick={(e) => navigate("/")}>
+          <a class="animated-link" onClick={(e) => navigate("/korzina")}>
             Korzina
           </a>
           <a class="animated-link">Profile</a>
