@@ -72,34 +72,6 @@
       "likes": 10,
       "rating": 0,
       "userPhoto": ""
-    },
-    {
-      "id": 7,
-      "phoneNumber": "+996 999 999 999",
-      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
-      "email": "214",
-      "salary": 300,
-      "FLL": "Bayel Ash",
-      "techPass": "23456",
-      "pass": "asasa",
-      "likes": 10,
-      "rating": 0,
-      "userPhoto": ""
-    },
-    {
-      "id": 8,
-      "phoneNumber": "+996 999 999 999",
-      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
-      "adopted": "false",
-      "salary": 300,
-      "email": "214",
-      "FLL": "Bayel Ash",
-      "techPass": "23456",
-      "pass": "asasa",
-      "likes": 10,
-      "rating": 0,
-      "userPhoto": ""
     }
   ]
 }
