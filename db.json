@@ -14,7 +14,6 @@
       "price": 1200,
       "id": 1
     },
-
     {
       "phone_sender": "Эмиль",
       "address_sender": "Ашырбеков",
@@ -41,7 +40,7 @@
       "FLL": "Emil Ashir",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
     },
@@ -55,7 +54,7 @@
       "FLL": "Bayel",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
     },
@@ -69,7 +68,7 @@
       "FLL": "Emil Ashirbekov",
       "techPass": "23456",
       "pass": "asasa",
-      "likes": 10,
+      "likes": 11,
       "rating": 0,
       "userPhoto": ""
     }
