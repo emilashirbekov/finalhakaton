@@ -9,8 +9,9 @@ const INIT_STATE = {
   couriers: [],
   couriersTrue: [],
   expectentions: 0,
-  totalPage: 0,
+  pageTotalCount: 1,
   likes: 0,
+  adopted: false,
   user: "",
   deliveries_true: [],
 };
@@ -34,12 +35,8 @@ function reducer(state = INIT_STATE, action) {
     case "INCREMENT_LIKES": {
       return { ...state, likes: action.payload };
     }
-    case "INCREMENT_RATING": {
-      return { ...state, couriers: action.payload };
-    }
-    case "GET_COURIERSTRUE": {
-      return { ...state, couriersTrue: action.payload };
-    }
+    case "PAGE_TOTAL_COUNT":
+      return { ...state, pageTotalCount: action.payload };
     default: {
       return state;
     }
@@ -154,6 +151,7 @@ const AdminContextProvider = ({ children }) => {
     expectentions: state.expectentions,
     changeCouriers,
     couriersTrue: state.couriersTrue,
+    pageTotalCount: state.pageTotalCount,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>
