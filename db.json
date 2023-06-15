@@ -1,78 +1,101 @@
 {
   "deliveriers": [
     {
-      "id": 1,
-      "name": "Emka",
-      "surname": "Ashirbekov",
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "false"
+      "phone_sender": "Эмиль",
+      "address_sender": "Ашырбеков",
+      "address_receiver": "Панфилова 8",
+      "description": "mzx c jscnsdc",
+      "cardName": "ascsamcka",
+      "cardNumber": "askcmakca",
+      "date": "ascmkacm",
+      "CVV": "aasmckac",
+      "adopted": "false",
+      "id": 1
     },
     {
-      "id": 2,
-      "phoneNumber": "Emka",
-
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "true"
-    },
-    {
-      "id": 3,
-      "phoneNumber": "Emka",
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "true"
-    },
-    {
-      "id": 4,
-      "phoneNumber": "Emka",
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "false"
-    },
-    {
-      "id": 5,
-      "phoneNumber": "Emka",
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "false"
-    },
-    {
-      "id": 6,
-      "phoneNumber": "Emka",
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "false"
-    },
-    {
-      "id": 7,
-      "phoneNumber": "Emka",
-
-      "form": "Bishkek",
-      "to": "osh",
-      "adopted": "false"
+      "phone_sender": "asdas",
+      "address_sender": "asda",
+      "address_receiver": "asdjnaj",
+      "description": "sadjna",
+      "cardName": "asdkas",
+      "cardNumber": "askdmak",
+      "date": "asdkm",
+      "CVV": "aksdm",
+      "weight": "asa",
+      "adopted": "false",
+      "id": 2
     }
   ],
   "couriers": [
     {
-      "name": "Эмиль Ашырбеков",
-      "email": "emkaashirbekov7910@gmail.com",
-      "phoneNumber": 709465239,
+      "id": 1,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
+      "email": "214",
+      "salary": 9320,
+      "FLL": "Emil Ashir",
+      "techPass": "23456",
       "pass": "asasa",
-      "techPass": "asasasa",
-      "photo": {},
-      "userPhoto": {},
-      "id": 1
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     },
     {
-      "name": "Эмиль Ашырбеков",
-      "email": "emkaashirbekov7910@gmail.com",
-      "phoneNumber": 709465239,
+      "id": 3,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
+      "salary": 300,
+      "email": "214",
+      "FLL": "Bayel",
+      "techPass": "23456",
       "pass": "asasa",
-      "techPass": "asasasa",
-      "photo": {},
-      "userPhoto": {},
-      "id": 2
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
+    },
+    {
+      "id": 6,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "true",
+      "salary": 5600,
+      "email": "214",
+      "FLL": "Emil Ashirbekov",
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
+    },
+    {
+      "id": 7,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "false",
+      "email": "214",
+      "salary": 300,
+      "FLL": "Bayel Ash",
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
+    },
+    {
+      "id": 8,
+      "phoneNumber": "+996 999 999 999",
+      "photoAuto": "https://avatars.mds.yandex.net/i?id=3f2359894854cbe9304fb1446c810aa3bdd52a76-5219442-images-thumbs&n=13",
+      "adopted": "false",
+      "salary": 300,
+      "email": "214",
+      "FLL": "Bayel Ash",
+      "techPass": "23456",
+      "pass": "asasa",
+      "likes": 10,
+      "rating": 0,
+      "userPhoto": ""
     }
   ],
   "orders": [

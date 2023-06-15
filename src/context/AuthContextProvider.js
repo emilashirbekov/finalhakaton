@@ -9,6 +9,7 @@ import { API_LOGIN, API_REGISTER } from "../helpers/const";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
+import { Try } from "@mui/icons-material";
 
 //Создаем контект
 const authContext = createContext();
@@ -98,8 +99,10 @@ const AuthContextProvider = ({ children }) => {
   }, []);
 
   function logout() {
-    localStorage.removeItem("token");
-    window.location.href = "/";
+    try {
+      localStorage.removeItem("token");
+      window.location.href = "/";
+    } catch (error) {}
   }
 
   let values = {

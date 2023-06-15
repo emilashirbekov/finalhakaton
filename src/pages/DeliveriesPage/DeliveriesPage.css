@@ -38,3 +38,21 @@
   font-size: 20px;
   color: white;
 }
+@media (max-width: 1334px) {
+  .MainContain__L {
+    display: none;
+  }
+  .MainContain__Right {
+    width: 100%;
+    margin-right: 3%;
+  }
+  .MainContain__Right__item {
+    margin-bottom: 20px;
+    margin-top: 20px;
+  }
+}
+@media (max-width: 324px) {
+  .MainContain__Right__item__span {
+    font-size: 15.5px;
+  }
+}

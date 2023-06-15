@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useContext, useEffect, useReducer } from "react";
-import { API_ORDERS } from "../helpers/const";
+// import { API_ORDERS } from "../helpers/const";
 
 const orderContext = createContext();
 
@@ -8,10 +8,8 @@ export const useOrder = () => useContext(orderContext);
 
 const INIT_STATE = {
   orders: [],
-  pageTotalCount: 1,
 };
 
-const LIMIT = 5;
 const reducer = (state = INIT_STATE, action) => {
   switch (action.type) {
     case "GET_ORDERS":
@@ -19,57 +17,49 @@ const reducer = (state = INIT_STATE, action) => {
         ...state,
         orders: action.payload,
       };
-    case "GET_PAGE":
-      return { ...state, pageTotalCount: action.payload };
     default:
       return state;
   }
 };
 
-const getAuth = () => {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const Authorization = `Bearer ${token.access}`;
-  const config = {
-    headers: {
-      Authorization,
-    },
-  };
-  return config;
-};
+// const getAuth = () => {
+//   const token = JSON.parse(localStorage.getItem("token"));
+//   const Authorization = `Bearer ${token.access}`;
+//   const config = {
+//     headers: {
+//       Authorization,
+//     },
+//   };
+//   return config;
+// };
 
 const OrderContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, INIT_STATE);
 
   const getOrders = async () => {
     try {
-      const config = getAuth();
-      const res = await axios.get(
-        `${API_ORDERS}${
-          window.location.search || window.location.search || `?_limit=${LIMIT}`
-        }`,
-        config
+      // const config = getAuth();
+      const res = await axios(
+        `http://localhost:7000/deliveriers/${window.location.search}`
       );
-      console.log(res.headers["x-total-count"]);
-      const totalPages = Math.ceil(res.headers["x-total-count"] / LIMIT);
+      const trued = res.data.filter((obj) => obj.adopted === "true");
+      dispatch({ type: "GET_ORDERS", payload: trued });
       dispatch({
-        type: "GET_ORDERS",
-        payload: res.data,
-      });
-
-      dispatch({
-        type: "GET_PAGE",
-        payload: totalPages,
+        type: "GET_TOTAL_PAGE",
+        payload: Math.ceil(res.data.count / 6),
       });
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(() => {
+    getOrders();
+  }, []);
 
   const addOrder = async (newOrder) => {
     try {
-      const config = getAuth();
-      const res = await axios.post(`${API_ORDERS}`, newOrder, config);
-      console.log(res);
+      // const config = getAuth();
+      await axios.post(`http://localhost:7000/deliveriers/`, newOrder);
     } catch (error) {
       console.log(error);
     }
@@ -79,10 +69,7 @@ const OrderContextProvider = ({ children }) => {
     orders: state.orders,
     getOrders,
     addOrder,
-    pageTotalCount: state.pageTotalCount,
   };
-  console.log(values.orders);
-
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>
   );

@@ -4,57 +4,76 @@ import { useAdmin } from "../../context/AdminContextProvider";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Deliveriers = () => {
-  const { getDeliveries, deliveries } = useAdmin();
+  const { getDeliveries, deliveries, changeAdoptedDeli, deleteDeliveriers } =
+    useAdmin();
   useEffect(() => {
     getDeliveries();
   }, []);
   console.log(deliveries);
+  function handlechange(obj) {
+    obj.adopted = "true";
+    return obj;
+  }
   return (
     <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
-      <Typography component="h1">Заказы</Typography>
+      <Typography sx={{ fontSize: "30px" }}>Заказы JetkirKg</Typography>
       <Grid
         container
         spacing={2}
-        sx={{ border: "1px solid #b4b4f5", marginTop: "20px" }}
+        sx={{
+          borderTop: "2px solid #b4b4f5",
+          borderBottom: "2px solid #b4b4f5",
+          marginTop: "20px",
+          padding: "3%",
+        }}
       >
         {deliveries.map((item) => (
           <Grid
             item
-            xs={6}
+            xs={12}
+            sm={6}
             key={item.id}
-            sx={{ boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)" }}
+            sx={{ border: "1px solid violet", marginBottom: "10px" }}
           >
             <Box
               sx={{
                 display: "flex",
-                width: "60%",
+                width: "90%",
                 justifyContent: "space-between",
               }}
             >
-              <Typography variant="subtitle1">Кто заказал:</Typography>
-              <Typography variant="subtitle1">Сумма заказа:</Typography>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                width: "60%",
-                justifyContent: "space-between",
-              }}
-            >
-              <Typography variant="body1">
-                {item.name} {item.surname}
+              <Typography variant="subtitle1" sx={{ marginBottom: "10px" }}>
+                Кто заказал:
               </Typography>
-              <Typography variant="body1">$800</Typography>
+              <Typography variant="subtitle1" sx={{ marginBottom: "10px" }}>
+                Сумма заказа:
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                width: "90%",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+                {item.phoneNumber}
+              </Typography>
+              <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+                $800
+              </Typography>
             </Box>
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "space-between",
-                width: "60%",
+                width: "90%",
                 alignItems: "center",
               }}
             >
-              <Typography variant="body1">От: {item.form}</Typography>
+              <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+                От: {item.form}
+              </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
                 <ArrowForwardIosIcon />
                 <ArrowForwardIosIcon />
@@ -62,14 +81,31 @@ const Deliveriers = () => {
                 <ArrowForwardIosIcon />
                 <ArrowForwardIosIcon />
                 <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon />
+                <ArrowForwardIosIcon />
               </Box>
-              <Typography variant="body1">В: {item.to}</Typography>
+              <Typography variant="body1" sx={{ marginBottom: "10px" }}>
+                В: {item.to}
+              </Typography>
             </Box>
-            <Box>
-              <Button variant="contained" color="primary">
+            <Box sx={{ marginRight: "2.5%" }}>
+              <Button
+                variant="contained"
+                color="success"
+                sx={{
+                  width: "50%",
+                }}
+                onClick={(e) => changeAdoptedDeli(item.id, handlechange(item))}
+              >
                 Принять
               </Button>
-              <Button variant="contained" color="secondary">
+              <Button
+                variant="contained"
+                color="error"
+                sx={{ width: "50%" }}
+                onClick={(e) => deleteDeliveriers(item.id)}
+              >
                 Отклонить
               </Button>
             </Box>
