@@ -22,7 +22,7 @@ const DeliverPage = () => {
   const [open, setOpen] = useState(false);
   const formik = useFormik({
     initialValues: {
-      name: "",
+      FLL: "",
       email: "",
       phoneNumber: "",
       pass: "",
@@ -65,18 +65,18 @@ const DeliverPage = () => {
                 action="#"
               >
                 <div>
-                  <label htmlFor="name">Фамилия и Имя</label>
+                  <label htmlFor="FLL">Фамилия и Имя</label>
                   <input
-                    id="name"
-                    name="name"
+                    id="FLL"
+                    name="FLL"
                     type="text"
-                    placeholder="Имя"
-                    value={formik.values.name}
+                    placeholder="FLL"
+                    value={formik.values.FLL}
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   />
-                  {formik.errors.name && formik.touched.name && (
-                    <div className="error-message">{formik.errors.name}</div>
+                  {formik.errors.FLL && formik.touched.FLL && (
+                    <div className="error-message">{formik.errors.FLL}</div>
                   )}
                 </div>
                 <div>

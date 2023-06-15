@@ -14,7 +14,6 @@
       "price": 1200,
       "id": 1
     },
-
     {
       "phone_sender": "Эмиль",
       "address_sender": "Ашырбеков",
@@ -40,7 +39,7 @@
       "salary": 9320,
       "FLL": "Emil Ashir",
       "techPass": "23456",
-      "pass": "asasa",
+      "pass": "asasd",
       "likes": 10,
       "rating": 0,
       "userPhoto": ""

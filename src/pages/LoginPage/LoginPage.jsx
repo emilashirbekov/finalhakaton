@@ -15,6 +15,8 @@ import { useMediaQuery } from "@mui/material";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { useAuth } from "../../context/AuthContextProvider";
+import { admins } from "../../helpers/const";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -46,7 +48,10 @@ const validationSchema = Yup.object().shape({
 export default function LoginPage() {
   const { login } = useAuth();
   const isSmallScreen = useMediaQuery("(max-width: 425px)");
-
+  const admin = admins;
+  console.log(admin);
+  const [email, setEmail] = React.useState();
+  const [password, setPassword] = React.useState();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -57,7 +62,14 @@ export default function LoginPage() {
       login(values);
     },
   });
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
+  const navigate = useNavigate();
   return (
     <div className="login-page">
       <ThemeProvider theme={defaultTheme}>
@@ -86,6 +98,23 @@ export default function LoginPage() {
                 fontSize: "5rem",
                 fontWeight: "bold",
               }}
+              onClick={(e) => {
+                let obj = {
+                  email,
+                  password,
+                };
+                let d;
+                for (let i = 0; i < admin.length; i++) {
+                  if (
+                    obj.email == admin[i].email &&
+                    obj.password == admin[i].password
+                  )
+                    d = true;
+                }
+                if (d === true) {
+                  navigate("/admin");
+                }
+              }}
             >
               Вход
             </Typography>
@@ -111,7 +140,10 @@ export default function LoginPage() {
                   },
                 }}
                 value={formik.values.email}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  formik.handleChange(e);
+                  handleEmailChange(e);
+                }}
                 onBlur={formik.handleBlur}
               />
               {formik.errors.email && formik.touched.email && (
@@ -132,7 +164,10 @@ export default function LoginPage() {
                   },
                 }}
                 value={formik.values.password}
-                onChange={formik.handleChange}
+                onChange={(e) => {
+                  handlePasswordChange(e);
+                  formik.handleChange(e);
+                }}
                 onBlur={formik.handleBlur}
               />
               {formik.errors.password && formik.touched.password && (
@@ -158,6 +193,23 @@ export default function LoginPage() {
                   "&:hover": {
                     background: "#f03850",
                   },
+                }}
+                onClick={(e) => {
+                  let obj = {
+                    email,
+                    password,
+                  };
+                  let d;
+                  for (let i = 0; i < admin.length; i++) {
+                    if (
+                      obj.email == admin[i].email &&
+                      obj.password == admin[i].password
+                    )
+                      d = true;
+                  }
+                  if (d === true) {
+                    navigate("/admin");
+                  }
                 }}
               >
                 Вход

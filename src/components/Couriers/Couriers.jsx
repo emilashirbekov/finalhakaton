@@ -7,7 +7,7 @@ import CommentIcon from "@mui/icons-material/Comment";
 import { useAdmin } from "../../context/AdminContextProvider";
 
 const Couriers = () => {
-  const { getCouriers, couriers, incrementLikes } = useAdmin();
+  const { getCouriers, couriersTrue, incrementLikes } = useAdmin();
   const [likedCouriers, setLikedCouriers] = useState([]);
 
   useEffect(() => {
@@ -27,13 +27,13 @@ const Couriers = () => {
         <h1>Наши Курьеры</h1>
       </div>
       <div className="row">
-        {couriers.map((courier) => (
+        {couriersTrue.map((courier) => (
           <div className="column" key={courier.id}>
             <div className="card">
               <div className="img-container">
                 <img src={courier.userPhoto} alt="Courier" />
               </div>
-              <h3>{courier.name}</h3>
+              <h3>{courier.FLL}</h3>
               <p>Контакты {courier.phoneNumber}</p>
               <div className="icons">
                 <IconButton onClick={() => handleLike(courier.id)}>

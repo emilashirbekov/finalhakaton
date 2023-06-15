@@ -14,6 +14,7 @@ import ScubaDivingIcon from "@mui/icons-material/ScubaDiving";
 import NotificationImportantIcon from "@mui/icons-material/NotificationImportant";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import { useAdmin } from "../../context/AdminContextProvider";
+import { useOrder } from "../../context/OrderContextProvider";
 const data = [
   { name: "the firs day", uv: 30 },
   { name: "the first week day", uv: 60 },
@@ -28,9 +29,12 @@ const DeliveriesPage = () => {
     deliveries,
     changeAdoptedDeli,
   } = useAdmin();
-
+  const { totalSum, getOrders } = useOrder();
   useEffect(() => {
     getCouriers();
+  }, []);
+  useEffect(() => {
+    getOrders();
   }, []);
   console.log(expectentions, "2143");
   const renderLineChart = (
@@ -81,7 +85,9 @@ const DeliveriesPage = () => {
           <IconButton sx={{ color: "white" }}>
             <LocalAtmIcon fontSize="large"></LocalAtmIcon>
           </IconButton>
-          <span className="MainContain__Right__item__span">TotalSum : {4}</span>
+          <span className="MainContain__Right__item__span">
+            TotalSum : {totalSum}
+          </span>
         </div>
       </div>
     </div>

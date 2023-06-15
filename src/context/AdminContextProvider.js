@@ -8,6 +8,7 @@ const INIT_STATE = {
   isAdmin: false,
   deliveries: [],
   couriers: [],
+  couriersTrue: [],
   expectentions: 0,
   totalPage: 0,
   user: "",
@@ -37,7 +38,9 @@ function reducer(state = INIT_STATE, action) {
     case "INCREMENT_RATING": {
       return { ...state, couriers: action.payload };
     }
-
+    case "GET_COURIERSTRUE": {
+      return { ...state, couriersTrue: action.payload };
+    }
     default: {
       return state;
     }
@@ -52,11 +55,12 @@ const AdminContextProvider = ({ children }) => {
       let res = await axios.get("http://localhost:7000/couriers");
       dispatch({ type: "GET_COURIERS", payload: res.data });
       const count = res.data.filter((obj) => obj.adopted === "false").length;
-
+      const acces = res.data.filter((obj) => obj.adopted === "true");
       dispatch({
         type: "GET_EXPECTENTIONS",
         payload: count,
       });
+      dispatch({ type: "GET_COURIERSTRUE", payload: acces });
     } catch (error) {
       console.log(error);
     }
@@ -194,6 +198,7 @@ const AdminContextProvider = ({ children }) => {
     deleteDeliveriers,
     expectentions: state.expectentions,
     changeCouriers,
+    couriersTrue: state.couriersTrue,
   };
   return (
     <adminContext.Provider value={values}>{children}</adminContext.Provider>

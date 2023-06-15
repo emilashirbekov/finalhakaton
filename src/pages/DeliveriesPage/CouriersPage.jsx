@@ -46,18 +46,17 @@ const CouriersPage = () => {
   const [salary, setSalary] = useState();
   const [photoAuto, setPhotoAuto] = useState();
   const [techPass, settexPasport] = useState();
+  const [pass, setPass] = useState();
   function handleChange(obj) {
     obj.salary = salary;
     obj.email = email;
     obj.phoneNumber = phoneNumber;
     obj.techPass = techPass;
     obj.FLL = FLL;
+    obj.pass = pass;
     return obj;
   }
-  const [cours, setCours] = useState(couriers);
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [coursPage] = useState(10);
+
   return (
     <div style={{ width: "90%", marginLeft: "5%", marginTop: "20px" }}>
       <Box>
@@ -169,6 +168,14 @@ const CouriersPage = () => {
                   value={techPass}
                   onChange={(e) => settexPasport(e.target.value)}
                 ></TextField>
+                <TextField
+                  sx={{ marginTop: "2%", width: "20%" }}
+                  required
+                  id="outlined-required"
+                  label="texpasport"
+                  value={pass}
+                  onChange={(e) => setPass(e.target.value)}
+                ></TextField>
                 <Button
                   sx={{ width: "50%", margin: "auto", color: "gray" }}
                   onClick={(e) => {
@@ -184,7 +191,7 @@ const CouriersPage = () => {
             {item.adopted == "true" ? (
               <Button
                 sx={{ color: "red" }}
-                onClick={() => deleteCouriers(item.id)}
+                onClick={(e) => deleteCouriers(item.id)}
               >
                 Уволить сотрудника
               </Button>
@@ -276,6 +283,7 @@ const CouriersPage = () => {
                       setPhoneNumber(item.phoneNumber);
                       setSalary(item.salary);
                       settexPasport(item.techPass);
+                      setPass(item.pass);
                     }}
                   >
                     Изменить курьера

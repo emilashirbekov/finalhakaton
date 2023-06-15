@@ -60,7 +60,7 @@ const Deliveriers = () => {
                 {item.phone_sender}
               </Typography>
               <Typography variant="body1" sx={{ marginBottom: "10px" }}>
-                $800
+                $ {item.price}
               </Typography>
             </Box>
             <Box

@@ -9,6 +9,7 @@ export const useOrder = () => useContext(orderContext);
 const INIT_STATE = {
   orders: [],
   allorders: [],
+  totalSum: 0,
 };
 
 const reducer = (state = INIT_STATE, action) => {
@@ -22,6 +23,11 @@ const reducer = (state = INIT_STATE, action) => {
       return {
         ...state,
         allorders: action.payload,
+      };
+    case "GET_TOTALSUM":
+      return {
+        ...state,
+        totalSum: action.payload,
       };
     default:
       return state;
@@ -55,6 +61,8 @@ const OrderContextProvider = ({ children }) => {
         payload: Math.ceil(res.data.count / 6),
       });
       dispatch({ type: "GET_ALLORDERS", payload: res.data });
+      let d = res.data.reduce((total, item) => total + item.price, 0);
+      dispatch({ type: "GET_TOTALSUM", payload: d });
     } catch (error) {
       console.log(error);
     }
@@ -74,6 +82,7 @@ const OrderContextProvider = ({ children }) => {
     getOrders,
     addOrder,
     allorders: state.allorders,
+    totalSum: state.totalSum,
   };
   return (
     <orderContext.Provider value={values}>{children}</orderContext.Provider>
